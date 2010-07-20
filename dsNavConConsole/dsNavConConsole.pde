@@ -2,7 +2,7 @@
 ** File:      dsNavConConsole.pde					    */
  String VerCon = new String ("dsNavConsole 1.5.0 - 05-2010"); //---
 /* Author:    Guido Ottaviani-->g.ottaviani@mediaprogetti.it<--
-** Description: navigation control board remote consolle  
+** Description: navigation control board remote console
 -------------------------------------------------------------------------------
 ** Compatible with dsPid33 version 2.2.3 
 -------------------------------------------------------------------------------
