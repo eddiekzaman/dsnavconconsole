@@ -104,15 +104,15 @@ String GaugeDescr, String GaugeUnit)
   if (GaugeColor != 99)  // if == 99 only the needle will be drawn
   {
     imageMode(CENTER);
-    image(Gauge, GaugeX, GaugeY);
-    image(GaugeTextField, GaugeX, GaugeY+(Gauge.width*0.66));
+    image(Gauge, Z(GaugeX), Z(GaugeY));
+    image(GaugeTextField, Z(GaugeX), Z(GaugeY)+(Z(Gauge.width*0.66)));
     imageMode(CORNERS);
      // text field
-    text(nf(GaugeAngle,0,1), GaugeX,GaugeY+TextYshift);
+    text(nf(GaugeAngle,0,1), Z(GaugeX),Z(GaugeY)+Z(TextYshift));
     textAlign(RIGHT);
-    text(GaugeDescr, GaugeX-TextXshift,GaugeY+TextYshift);
+    text(GaugeDescr, Z(GaugeX-TextXshift),Z(GaugeY+TextYshift));
     textAlign(LEFT);
-    text(GaugeUnit, GaugeX+TextXshift,GaugeY+TextYshift);
+    text(GaugeUnit, Z(GaugeX+TextXshift),Z(GaugeY+TextYshift));
      textFont(CharFontLight, 11);   
      fill(0,0,0);
      textAlign(CENTER, CENTER);
@@ -136,7 +136,7 @@ String GaugeDescr, String GaugeUnit)
           TickX2 = GaugeRadius * 1.1 * TempX + GaugeX;
           TickY2 = GaugeRadius * 1.1 * TempY + GaugeY;
       
-          text(nf(i*ScaleStep+GaugeMin,0,0), TickX, TickY);
+          text(nf(i*ScaleStep+GaugeMin,0,0), Z(TickX), Z(TickY));
           line(TickX1, TickY1, TickX2, TickY2);
         }
       } 
@@ -172,11 +172,11 @@ String GaugeDescr, String GaugeUnit)
   
   // needle drawing
   pushMatrix();
-  translate(GaugeX, GaugeY);
+  translate(Z(GaugeX), Z(GaugeY));
   rotate(radians((GaugeAngle-GaugeMin) * (AngleMax - AngleMin) / (GaugeMax - GaugeMin) - 90 + AngleMin));
   strokeWeight(3.0);
   stroke(GaugeR, GaugeG, GaugeB);
-  triangle(15,-NeedleBase,15,NeedleBase,GaugeRadius,0);
+  triangle(Z(15),Z(-NeedleBase),Z(15),Z(NeedleBase),Z(GaugeRadius),0);
   popMatrix();
   textAlign(CENTER);
 }

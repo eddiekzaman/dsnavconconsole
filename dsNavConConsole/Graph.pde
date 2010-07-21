@@ -88,7 +88,7 @@ void DefineGrid(int MinX, int MaxX, int MinY, int MaxY, int Xstep, int Ystep,
   {
      text(MinX+(ScaleXstep*ind), (ind*GridStepX), 20);
   }
-  Xscale = get(30,775,800,20);
+  Xscale = get(Z(30), Z(775), Z(800), Z(20));
   
   textAlign(RIGHT);
   if (Flag==3)

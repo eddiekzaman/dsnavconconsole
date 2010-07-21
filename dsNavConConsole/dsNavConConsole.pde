@@ -249,12 +249,12 @@ boolean ReleasedFlag = false;
 int Cycle = 100;
 int CyclePeriod;
 
-int RelX = 432;
-int RelY = 397;
-int RelX0 = 57;
-int Ysize = 750;
-int Xsize = 750;
-int RelY0 = 21 + Ysize;
+float RelX = Z(432);
+float RelY = Z(397);
+float RelX0 = Z(57);
+float Ysize = Z(750);
+float Xsize = Z(750);
+float RelY0 = Z(21) + Ysize;
 
 int i = 0;
 float PrevX = 0;
@@ -313,7 +313,7 @@ int IdlePerc;
 int MaxSpeedData = 750;
 int Max = 750;
 int MaxYvalue = 500;
-int Yoffset = Ysize/4;
+float Yoffset = Ysize/4;
 int[] Speed1 = new int[MaxSpeedData+10]; // Y axis graph data for first value
 int[] Speed2 = new int[MaxSpeedData+10]; // Y axis graph data for second value
 int[] Speed0 = new int[MaxSpeedData+10]; // Y axis graph data for mean value
@@ -388,7 +388,9 @@ int CellSize = 100;
 void setup()
 {
   int ii = 0;
-  size(1295, 815);
+  int Xw = Z(1295);
+  int Yh = Z(815);
+  size(Xw, Yh);
   smooth();
 
   CharFont = loadFont("HelveticaNeue-Bold-48.vlw"); 
@@ -398,9 +400,13 @@ void setup()
   FixFont = loadFont("Courier-Bold-48.vlw"); 
   
   bg = loadImage("Panel.gif");
+  bg.resize(Xw,Yh);
   bgConfig = loadImage("EmptyPanel.png");
+  bgConfig.resize(Xw,Yh);
   bgDetails = loadImage("Panel.gif");
+  bgDetails.resize(Xw,Yh);
   bgSequencer = loadImage("EmptyPanel.png");
+  bgSequencer.resize(Xw,Yh);
   background(bg); 
   
 //  MeanValues = createWriter("Mean.txt"); 
@@ -415,20 +421,35 @@ void setup()
   
  //  BlankGrid = get(57,21,751,751);
   LedRedOn = loadImage("LedRedOn.gif");
+  LedRedOn.resize(Z(LedRedOn.width),0);
   LedRedOff = loadImage("LedRedOff.gif");
+  LedRedOff.resize(Z(LedRedOff.width),0);
   LedGreenOn = loadImage("LedGreenOn.gif");
+  LedGreenOn.resize(Z(LedGreenOn.width),0);
   LedGreenOff = loadImage("LedGreenOff.gif");
+  LedGreenOff.resize(Z(LedGreenOff.width),0);
   LedYellowOn = loadImage("LedYellowOn.gif");
+  LedYellowOn.resize(Z(LedYellowOn.width),0);
   LedYellowOff = loadImage("LedYellowOff.gif");
+  LedYellowOff.resize(Z(LedYellowOff.width),0);
   bN = loadImage("ReferenceButtonNormal.gif");
+  bN.resize(Z(bN.width),0);
   bO = loadImage("ReferenceButtonOver.gif");
+  bO.resize(Z(bO.width),0);
   bP = loadImage("ReferenceButtonPressed.gif");
+  bP.resize(Z(bP.width),0);
   bNr = loadImage("ReferenceButtonNormalRed.gif");
+  bNr.resize(Z(bNr.width),0);
   bOr = loadImage("ReferenceButtonOverRed.gif");
+  bOr.resize(Z(bOr.width),0);
   bPr = loadImage("ReferenceButtonPressedRed.gif");  
+  bPr.resize(Z(bPr.width),0);
   Gauge = loadImage("Gauge.png"); 
+  Gauge.resize(Z(Gauge.width),0);
   GaugeTextField = loadImage("GaugeTextField.png"); 
   Knob = loadImage("Knob.png"); 
+  Knob.resize(Z(Knob.width),0);
+
   InputField = loadImage("InputField.png");
 
   InputFieldsDefinition();
@@ -460,7 +481,7 @@ void setup()
   }
   
   controlP5 = new ControlP5(this);
-  Slider s = controlP5.addSlider("bar",-500,500,0,1260,500,10,180);
+  Slider s = controlP5.addSlider("bar",-500,500,0,Z(1260),Z(500),10,180);
   controlP5.controller("bar").setLabel("");
   controlP5.controller("bar").setValueLabel("");
 //  controlP5.controller("bar").setColorForeground(255);
@@ -507,7 +528,7 @@ void draw()
     break;
   }
 
-  image(LedYellowOff,1169,700);
+  image(LedYellowOff,Z(1169),Z(700));
   IdleCount++;     // count idle period in ms
   if(IdleCount > 100)
   {
@@ -516,14 +537,14 @@ void draw()
     IdleTime=millis();
   }
   textAlign(CENTER);
-  text(IdlePerc,1177,760);
+  text(IdlePerc,Z(1177),Z(760));
   text("RX",1177,740);
   
-  text(IdleTimeP/100, 1210, 760);
-  text("Cycle",1210,740);
+  text(IdleTimeP/100, Z(1210), Z(760));
+  text("Cycle",Z(1210), Z(740));
   
-  text(Err, 1240, 760);
-  text("TX",1240,740);
+  text(Err, Z(1240), Z(760));
+  text("TX", Z(1240), Z(740));
   
   if ((millis()-Cycle) > CyclePeriod)  // slow loop start------------------------
   {
