@@ -12,7 +12,7 @@ void InputFieldsDefinition()
   // Define and create input fields for Main panel  *************************
   GuiRun = new GUIController(this);
   
-  int Fheight = 21;
+  int Fheight = 30;
   
   M[0][0] = Z(1043);
   M[0][1] = Z(503);
@@ -164,7 +164,7 @@ void InputFieldsDefinition()
   InputMGXmin = new IFTextField("", C[19][0], C[19][1], W);
   InputMGXmin.addActionListener(this);
   InputMGXmin.setHeight(Z(Fheight));
-
+  
   C[20][0] = Z(261);
   C[20][1] = Z(63);    
   InputMGXmax = new IFTextField("", C[20][0], C[20][1], W);
