@@ -12,13 +12,12 @@ void InputFieldsDefinition()
   // Define and create input fields for Main panel  *************************
   GuiRun = new GUIController(this);
   
-  int Fheight = 30;
-  
   M[0][0] = Z(1043);
   M[0][1] = Z(503);
   InputSpeed = new IFTextField("", M[0][0], M[0][1], W);
   InputSpeed.addActionListener(this);
   InputSpeed.setHeight(Z(Fheight));
+
   
   M[1][0] = Z(1043);
   M[1][1] = Z(553);

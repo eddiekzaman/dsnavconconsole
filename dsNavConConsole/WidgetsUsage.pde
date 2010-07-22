@@ -6,7 +6,7 @@ void MainPanel()  // Main panel controls
     image(Grid,Z(57),Z(21));
     image(Xscale,Z(30),Z(775));
     image(Yscale,Z(10),Z(10));
-        
+    
     Sms();
     ButtonSms();
     ButtonConfig();
