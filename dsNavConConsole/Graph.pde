@@ -62,7 +62,7 @@ void DefineGrid(int MinX, int MaxX, int MinY, int MaxY, int Xstep, int Ystep,
   float GridStepYsmall = (float)(Ysize)/(float)(YstepSmall);
   int ScaleXstep = (MaxX-MinX)/Xstep;
   int ScaleYstep = (MaxY-MinY)/Ystep;
-  
+    
   Xk = (float)Xsize / (float)(MaxX-MinX);
   Yk = (float)Ysize / (float)(MaxY-MinY);
   Xkofst = (0 - MinX) * Xk;

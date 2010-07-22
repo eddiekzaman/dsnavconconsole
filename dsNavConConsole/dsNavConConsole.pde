@@ -386,27 +386,38 @@ float MaxMapX = 7500;
 float MaxMapY = 7500;
 int CellSize = 100;
 
-static float ZoomFactor; 
+float ZoomFactor; 
 String[] Zoom = new String[1]; // Scaling factor. Max range = 75 - 120
-  
+int XscreenSize = 1295;
+int YscreenSize = 815;
 /*/////////////////////////////////////////////////////////////////////////////*/
 
 void setup()
 {
   int ii = 0;
 
-  if (loadStrings("size.cfg") != null)
+  if (loadStrings("YscreenSize.cfg") != null)
    {
-     Zoom = loadStrings("size.cfg");
-     ZoomFactor = (float)(Integer.parseInt(Zoom[0])) / 100;
+     Zoom = loadStrings("YscreenSize.cfg");
+     ZoomFactor = (float)(Integer.parseInt(Zoom[0]));
+     if (ZoomFactor < 600)
+     {
+       ZoomFactor = 600;
+     }
+     if (ZoomFactor > 1000)
+     {
+       ZoomFactor = 1000;
+     }
+     
+     ZoomFactor = ZoomFactor / YscreenSize;
    }
    else
    {
      ZoomFactor = 0.75;
    }
 
-  int Xw = Z(1295); 
-  int Yh = Z(815);
+  int Xw = Z(XscreenSize); 
+  int Yh = Z(YscreenSize);
 
   size(Xw, Yh);
   smooth();
