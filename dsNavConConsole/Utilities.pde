@@ -2,9 +2,6 @@
 int Z(float Num2Scale)
 {
   // Zoom the graphics ZoomFactor = 1 -> 1280 x 800 monitor
-  
-  float ZoomFactor = 1; // Scaling factor. Max range = 0.75 - 1.2
-  
   return (int)(Num2Scale * ZoomFactor);
 }
 /*-----------------------------------------------------------------------------*/
