@@ -200,19 +200,19 @@ void ButtonVersion()
       }
     }
     textAlign(LEFT);
-    textFont(CharFont,10);
+    textFont(CharFont,Z(10));
     text("X: "+Xpos,Z(700),Z(20));
     text("Y: "+Ypos,Z(760),Z(20));
     text(VerCon, Z(100), Z(20));
     textAlign(RIGHT);
     String VerS = new String(Ver);
-    textFont(CharFont, 15); 
+    textFont(CharFont, Z(15)); 
     text(VerS, Z(1148), Z(672)); 
     fill(255,0,0);
-    textFont(CharFont, 28); 
+    textFont(CharFont, Z(28)); 
     text(Sim, Z(500), Z(21));
     fill(255,255,255);
-    textFont(CharFont, 15); 
+    textFont(CharFont, Z(15)); 
     BtnSendVersion.display();
 }
 

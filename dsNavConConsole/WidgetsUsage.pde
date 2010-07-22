@@ -1,11 +1,11 @@
 /*-----------------------------------------------------------------------------*/  
 void MainPanel()  // Main panel controls
 {
-    Grid = get(57,21,751,751);
+    Grid = get(Z(57),Z(21),Z(751),Z(751));
     background(bg);
-    image(Grid,57,21);
-    image(Xscale,30,775);
-    image(Yscale,10,10);
+    image(Grid,Z(57),Z(21));
+    image(Xscale,Z(30),Z(775));
+    image(Yscale,Z(10),Z(10));
         
     Sms();
     ButtonSms();
@@ -49,14 +49,14 @@ void ConfigPanel()  // Config panel controls
     float Kvel2;
     
     background(bgConfig);
-    text("Last Error",1230,505);
-    text(ErrorCode,1230,525);
+    text("Last Error",Z(1230),Z(505));
+    text(ErrorCode,Z(1230),Z(525));
     ConfigPanelText();
     
     BtnRun.display();
     BtnRun.update();
     
-    textFont(CharFont, 8); 
+    textFont(CharFont, Z(8)); 
     
     BtnSeqL.update();
     if (BtnSeqL.released)
@@ -146,7 +146,7 @@ void ConfigPanel()  // Config panel controls
          All values are computed starting from mechanical parameters of the wheels 
          and the encoders
       */
-      textFont(CharFont, 8); 
+      textFont(CharFont, Z(8)); 
       K = RangeCheckInt(InputAxle.getValue(), 0, 999999999);
       InputAxle.setValue(nf(K,0));
             
@@ -499,7 +499,7 @@ void ConfigPanel()  // Config panel controls
    
       StandardFont();
       textAlign(LEFT);
-      text("Available COM ports:",800,480);
+      text("Available COM ports:",Z(800),Z(480));
       for(i=0;i<(SerialList.length);i++)
       {
         if (i == RS232ComPort)
@@ -510,7 +510,7 @@ void ConfigPanel()  // Config panel controls
         {
           fill(255,255,255);
         }
-        text(i + " = " + SerialList[i],810,500 + (i*20));
+        text(i + " = " + SerialList[i],Z(810),Z(500) + (i*20));
       }
       fill(255,255,255);
       
@@ -521,7 +521,7 @@ void ConfigPanel()  // Config panel controls
       background(bg);
       StandardFont();
       DefineMainGrid();
-      Grid = get(57,21,751,751);
+      Grid = get(Z(57),Z(21),Z(751),Z(751));
 
 //      MeanValues.flush(); 
     }
@@ -535,9 +535,9 @@ void ConfigPanel()  // Config panel controls
 void DetailsPanel()  // Details panel controls
 {
     background(bgDetails);
-    image(Grid,57,21);
-    image(Xscale,30,775);
-    image(Yscale,10,10);    
+    image(Grid,Z(57),Z(21));
+    image(Xscale,Z(30),Z(775));
+    image(Yscale,Z(10),Z(10));    
     Plot();
     
     Sms();
@@ -577,7 +577,7 @@ void SequencerPanel()  // Sequencer panel controls
 {
     background(bgSequencer);
     
-    textFont(CharFont, 8); 
+    textFont(CharFont, Z(8)); 
     SequencerPanelText();
     ButtonConfig();
     
@@ -589,7 +589,7 @@ void SequencerPanel()  // Sequencer panel controls
       background(bgDetails);
       StandardFont();
       DefineDetailsGrid();
-      Grid = get(57,21,751,751);
+      Grid = get(Z(57),Z(21),Z(751),Z(751));
     }
     BtnDet.display();
     
@@ -773,11 +773,11 @@ void SequencerPanel()  // Sequencer panel controls
     BtnSendSeq.display();
 //????????????????????????????????????????????????????????????????????????????????    
  
-textFont(FixFont, 15); 
+textFont(FixFont, Z(15)); 
 textAlign(LEFT);
-int TextX = 700;
-int TextY = 480;
-int TextS = 15;
+int TextX = Z(700);
+int TextY = Z(480);
+int TextS = Z(15);
 // text("Sequencer code description",TextX,TextY+TextS*0);
 text("Code Meaning Description                         A   B   C",TextX,TextY+TextS*1);
 text("0    stop    end of sequence                            ",TextX,TextY+TextS*2);
@@ -802,7 +802,7 @@ text("  Angle=deg, Speed=mm/s, X-Y=mm, Delay=n x 50ms",TextX,TextY+TextS*11);
       background(bg);
       StandardFont();
       DefineMainGrid();
-      Grid = get(57,21,751,751);
+      Grid = get(Z(57),Z(21),Z(751),Z(751));
     }
     BtnRun.display();
 */

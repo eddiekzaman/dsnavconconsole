@@ -9,8 +9,8 @@ boolean RxData(char Cmd,int Len)
         {
           RS232Port.clear();
           textAlign(LEFT);
-          text("RX error:",1040,710);
-          text("TMO - No RX",1040,725);;
+          text("RX error:",Z(1040),Z(710));
+          text("TMO - No RX",Z(1040),Z(725));;
           textAlign(CENTER);
           Err++;
           return false;
@@ -27,10 +27,10 @@ boolean RxData(char Cmd,int Len)
       {
         RS232Port.clear();
         textAlign(LEFT);
-        text("RX error:",1040,710);
-        text("No Header",1040,725);
-        text("Expected: @",1040,740);
-        text("Found: " + (char)(RxBuff[0]),1040,755);
+        text("RX error:",Z(1040),Z(710));
+        text("No Header",Z(1040),Z(725));
+        text("Expected: @",Z(1040),Z(740));
+        text("Found: " + (char)(RxBuff[0]),Z(1040),Z(755));
         textAlign(CENTER);
         Err++;
         return false;
@@ -39,10 +39,10 @@ boolean RxData(char Cmd,int Len)
       {
         RS232Port.clear();
         textAlign(LEFT);
-        text("RX error:",1040,710);
-        text("Wrong CMD",1040,725);
+        text("RX error:",Z(1040),Z(710));
+        text("Wrong CMD",Z(1040),Z(725));
         text("Expected: "+Cmd,1040,740);
-        text("Found: " + (char)(RxBuff[2]),1040,755);
+        text("Found: " + (char)(RxBuff[2]),Z(1040),Z(755));
         textAlign(CENTER);
         Err++;
         return false;
@@ -51,10 +51,10 @@ boolean RxData(char Cmd,int Len)
       {
         RS232Port.clear();
         textAlign(LEFT);
-        text("RX error:",1040,710);
-        text("Wrong LEN",1040,725);
-        text("Expected: "+Len,1040,740);
-        text("Found: " + (RxBuff[3]-1),1040,755);
+        text("RX error:",Z(1040),Z(710));
+        text("Wrong LEN",Z(1040),Z(725));
+        text("Expected: "+Len,Z(1040),Z(740));
+        text("Found: " + (RxBuff[3]-1),Z(1040),Z(755));
         textAlign(CENTER);
         Err++;
         return false;
@@ -71,13 +71,13 @@ boolean RxData(char Cmd,int Len)
         textAlign(LEFT);
         text("RX error:",1040,710);
         text("ChkSum err",1040,725);
-        text("Expected: "+RxBuff[i],1040,740);
-        text("Found: " + ChkSum,1040,755);
+        text("Expected: "+RxBuff[i],Z(1040),Z(740));
+        text("Found: " + ChkSum,Z(1040),Z(755));
         textAlign(CENTER);
         Err++;
         return false;
       }
-      image(LedYellowOn,1169,700);
+      image(LedYellowOn,Z(1169),Z(700));
       return true;
   }
   return false;

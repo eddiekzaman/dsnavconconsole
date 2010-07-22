@@ -1,15 +1,17 @@
 /*-----------------------------------------------------------------------------*/
-int Z(float Coord)
+int Z(float Num2Scale)
 {
-  // Zoom the graphics 
-  float Zoom = 0.8;
-  return (int)(Coord * Zoom);
+  // Zoom the graphics ZoomFactor = 1 -> 1280 x 800 monitor
+  
+  float ZoomFactor = 0.85; // Scaling factor. Max range = 0.75 - 1.2
+  
+  return (int)(Num2Scale * ZoomFactor);
 }
 /*-----------------------------------------------------------------------------*/
 void StandardFont()
 {
   fill(255,255,255);
-  textFont(CharFont, 15); 
+  textFont(CharFont, Z(15)); 
   textAlign(CENTER);
 }
 
@@ -30,20 +32,20 @@ void LedBlink()
 {
   if (BlinkFlag)  // blink green (cycle) led
   {
-   image(LedGreenOn,1200,700);
+   image(LedGreenOn,Z(1200),Z(700));
   }
   else
   {
-   image(LedGreenOff,1200,700);
+   image(LedGreenOff,Z(1200),Z(700));
   }
     
   if (TxFlag)  // blink red (TX) led
   {
-    image(LedRedOn,1230,700);
+    image(LedRedOn,Z(1230),(700));
   }
   else
   {
-    image(LedRedOff,1230,700);
+    image(LedRedOff,Z(1230),Z(700));
     TxTimer = millis();
   }
   if ((millis() - TxTimer) >= TxPeriod)

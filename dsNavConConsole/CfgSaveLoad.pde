@@ -64,6 +64,7 @@ void CfgDefault()
       StrCfg[35] =  "75";
       StrCfg[36] =  "3";
       StrCfg[37] =  "200";
+
       
      int SeqK=38;
      int SeqI;
@@ -72,13 +73,13 @@ void CfgDefault()
         StrCfg[SeqK] =  "0";
         SeqK++;
      }
-  
+     StrCfg[64] =  "75";
 }
 
 /*-----------------------------------------------------------------------------*/
 void FillTextFields()
 {
-       textFont(CharFont, 10); 
+       textFont(CharFont, Z(10)); 
        InputSpeed1Kp.setValue(StrCfg[0]);
        InputSpeed1Ki.setValue(StrCfg[1]);
        InputSpeed1Kd.setValue(StrCfg[2]);
@@ -124,7 +125,7 @@ void FillTextFields()
       {
         saveStrings("config.txt",StrCfg);
       }
-       textFont(CharFont, 15); 
+       textFont(CharFont, Z(15)); 
       
       MainGridMinX = Integer.parseInt(StrCfg[19]);
       MainGridMaxX = Integer.parseInt(StrCfg[20]);
@@ -161,6 +162,7 @@ void FillTextFields()
          }
        }
        
+      
       Input01Code.setValue(nf(Seq[0][0],0));
       Input01A.setValue(nf(Seq[0][1],0));
       Input01B.setValue(nf(Seq[0][2],0));

@@ -27,8 +27,8 @@ float AngleMin, float AngleMax, int KnobTick, String KnobDescr, String KnobUnit)
   Description field and measurement unit are displayed close to text field
   */
 
-  int TextYshift = Z(112);  // text field distance from the center of the gauge
-  int TextXshift = Z(28);
+  int TextYshift = Z(115);  // text field distance from the center of the gauge
+  int TextXshift = Z(34);
   int i;
   float TickX;
   float TickY;
@@ -49,18 +49,20 @@ float AngleMin, float AngleMax, int KnobTick, String KnobDescr, String KnobUnit)
       a different image.
   */
   KnobRadius = Knob.width*0.40;
+  KnobX=Z(KnobX);
+  KnobY=Z(KnobY);
   
   imageMode(CENTER);
-  image(Knob, Z(KnobX), Z(KnobY));
-  image(GaugeTextField, Z(KnobX), Z(KnobY+(Knob.width*0.675)));
+  image(Knob, KnobX, KnobY);
+  image(GaugeTextField, KnobX, KnobY+(Knob.width*0.675));
   imageMode(CORNERS);
    // text field
 //  text(nf(GaugeAngle,0,1), GaugeX,GaugeY+TextYshift);
   textAlign(RIGHT);
-  text(KnobDescr, Z(KnobX-TextXshift),Z(KnobY+TextYshift));
+  text(KnobDescr, KnobX-TextXshift,KnobY+TextYshift);
   textAlign(LEFT);
-  text(KnobUnit, Z(KnobX+TextXshift),Z(KnobY+TextYshift));
-   textFont(CharFontLight, 11);   
+  text(KnobUnit, KnobX+TextXshift,KnobY+TextYshift);
+   textFont(CharFontLight, Z(11));   
    fill(0,0,0);
    textAlign(CENTER, CENTER);
    strokeWeight(1);
@@ -83,7 +85,7 @@ float AngleMin, float AngleMax, int KnobTick, String KnobDescr, String KnobUnit)
         TickX2 = KnobRadius * 1.1 * TempX + KnobX;
         TickY2 = KnobRadius * 1.1 * TempY + KnobY;
     
-        text(nf(i*ScaleStep+KnobMin,0,0), Z(TickX), Z(TickY));
+        text(nf(i*ScaleStep+KnobMin,0,0), TickX, TickY);
         line(TickX1, TickY1, TickX2, TickY2);
       }
     }
@@ -93,9 +95,9 @@ float AngleMin, float AngleMax, int KnobTick, String KnobDescr, String KnobUnit)
   float KnobDy = mouseY - KnobY;
   int Base = 3;
   pushMatrix();
-  translate(Z(KnobX), Z(KnobY));
-  if (mouseX >= Z(KnobX-KnobRadius) && mouseX <= Z(KnobX+KnobRadius) && 
-      mouseY >= Z(KnobY-KnobRadius) && mouseY <= Z(KnobY+KnobRadius) &&
+  translate(KnobX, KnobY);
+  if (mouseX >= KnobX-KnobRadius && mouseX <= KnobX+KnobRadius && 
+      mouseY >= KnobY-KnobRadius && mouseY <= KnobY+KnobRadius &&
       mousePressed)
     {
       KnobAngle = atan2(KnobDy, KnobDx);  
@@ -109,11 +111,12 @@ float AngleMin, float AngleMax, int KnobTick, String KnobDescr, String KnobUnit)
    rotate(KnobAngle);
    strokeWeight(7.0);
    stroke(67,85,100);
-   triangle(Z(0),Z(-Base),Z(0),Z(Base),KnobRadius*0.78,0);
+   triangle(0,-Base,0,Base,KnobRadius*0.78,0);
    popMatrix();
    KnobAngle1=degrees(KnobAngle+(PI/2));
    textAlign(CENTER);
-   text(nf(KnobAngle1,0,1), KnobX,KnobY+115);
+   text(nf(KnobAngle1,0,1), KnobX,KnobY+TextYshift);
    DesAngle = KnobAngle1;
 }
+
 

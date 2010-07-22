@@ -88,6 +88,7 @@ void DefineGrid(int MinX, int MaxX, int MinY, int MaxY, int Xstep, int Ystep,
   {
      text(MinX+(ScaleXstep*ind), (ind*GridStepX), 20);
   }
+  
   Xscale = get(Z(30), Z(775), Z(800), Z(20));
   
   textAlign(RIGHT);
@@ -110,7 +111,7 @@ void DefineGrid(int MinX, int MaxX, int MinY, int MaxY, int Xstep, int Ystep,
        text(MinY+(ScaleYstep*ind), -5, -(ind*GridStepY-5));
     }
   }
-  Yscale = get(10,10,45,770);
+  Yscale = get(Z(10),Z(10),Z(45),Z(770));
 
   rotate(PI);
   rotate(HALF_PI);

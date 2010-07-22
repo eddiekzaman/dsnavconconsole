@@ -178,7 +178,7 @@ class ImageButtons extends Button
   void display() 
   {
     image(currentimage, x, y);
-    textFont(CharFont, 14); 
+    textFont(CharFont, Z(14)); 
     textAlign(CENTER,CENTER);
     // customization label for the specific button written at the center of the image
     text(bLabel,x+w/2,y+h/2);

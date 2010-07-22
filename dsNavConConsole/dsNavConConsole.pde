@@ -155,7 +155,7 @@ int[][] M = new int[4][4];
 int[][] C = new int[38][38];
 int[][] Sx = new int[16][4];
 int[][] Sy = new int[16][4];
-int W = 73;
+int W = Z(73);
 
 // ************************** buttons
 ImageButtons BtnQuit;
@@ -388,11 +388,13 @@ int CellSize = 100;
 void setup()
 {
   int ii = 0;
-  int Xw = Z(1295);
+
+  int Xw = Z(1295); 
   int Yh = Z(815);
+
   size(Xw, Yh);
   smooth();
-
+  
   CharFont = loadFont("HelveticaNeue-Bold-48.vlw"); 
   CharFontLight = loadFont("HelveticaNeue-UltraLight-48.vlw"); 
   StandardFont();
@@ -451,7 +453,8 @@ void setup()
   Knob.resize(Z(Knob.width),0);
 
   InputField = loadImage("InputField.png");
-
+  InputField.resize(Z(InputField.width),0);
+  
   InputFieldsDefinition();
   LoadCfg();
   DefineButtons();
@@ -538,7 +541,7 @@ void draw()
   }
   textAlign(CENTER);
   text(IdlePerc,Z(1177),Z(760));
-  text("RX",1177,740);
+  text("RX",Z(1177),Z(740));
   
   text(IdleTimeP/100, Z(1210), Z(760));
   text("Cycle",Z(1210), Z(740));
