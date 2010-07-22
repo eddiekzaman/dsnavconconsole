@@ -155,7 +155,10 @@ int[][] M = new int[4][4];
 int[][] C = new int[38][38];
 int[][] Sx = new int[16][4];
 int[][] Sy = new int[16][4];
+
 int W = Z(73);
+int Fheight = 21;
+  
 
 // ************************** buttons
 ImageButtons BtnQuit;
