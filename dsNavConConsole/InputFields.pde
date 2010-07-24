@@ -735,8 +735,8 @@ void actionPerformed(GUIEvent e)   // an event on input fields
 void MainPanelText()
 {
   int i;
-  int x = 7;
-  int y = 5;
+  int x = 5;
+  int y = 3;
   String[][] Descr = new String[4][4];
   Descr[2][0] = "Coord. X=";
   Descr[2][1] = "";
@@ -751,9 +751,9 @@ void MainPanelText()
     {
       image (InputField,M[i][0]-x, M[i][1]-y);
       textAlign(RIGHT);
-      text (Descr[i][0],(M[i][0]-10), (M[i][1]+15));
+      text (Descr[i][0],(M[i][0]-Z(6)), (M[i][1]+Z(15)));
       textAlign(LEFT);
-      text (Descr[i][1],(M[i][0]+W+10), (M[i][1]+15));
+      text (Descr[i][1],(M[i][0]+W+Z(6)), (M[i][1]+Z(15)));
     }
 }
 
@@ -761,8 +761,8 @@ void MainPanelText()
 void ConfigPanelText()
 {
   int i;
-  int x = 7;
-  int y = 5;
+  int x = 5;
+  int y = 3;
   int z = 15;
   String[] Descr = new String[38];
   Descr[0] = "Kp x 10.000";
@@ -808,7 +808,7 @@ void ConfigPanelText()
     {
       image (InputField,C[i][0]-x, C[i][1]-y);
       textAlign(CENTER);
-      text (Descr[i],(C[i][0]+W/2+2), (C[i][1]-10));
+      text (Descr[i],(C[i][0]+W/2+2), (C[i][1]-Z(10)));
     }
       textAlign(LEFT);
       text ("Main Panel Grid",(C[22][0]+W+z), (C[22][1]+z));
@@ -829,8 +829,8 @@ void SequencerPanelText()
 {
   int i;
   int j;
-  int x = 7;
-  int y = 5;
+  int x = 5;
+  int y = 3;
   int z = 10;
   for (i=0; i<16; i++)
   {

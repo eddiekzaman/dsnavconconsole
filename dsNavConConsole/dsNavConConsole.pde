@@ -156,8 +156,8 @@ int[][] C = new int[38][38];
 int[][] Sx = new int[16][4];
 int[][] Sy = new int[16][4];
 
-int W = Z(73);
-int Fheight = 21;
+int W;
+int Fheight;
   
 
 // ************************** buttons
@@ -252,12 +252,12 @@ boolean ReleasedFlag = false;
 int Cycle = 100;
 int CyclePeriod;
 
-float RelX = Z(432);
-float RelY = Z(397);
-float RelX0 = Z(57);
-float Ysize = Z(750);
-float Xsize = Z(750);
-float RelY0 = Z(21) + Ysize;
+float RelX;
+float RelY;
+float RelX0;
+float Ysize;
+float Xsize;
+float RelY0;
 
 int i = 0;
 float PrevX = 0;
@@ -316,7 +316,7 @@ int IdlePerc;
 int MaxSpeedData = 750;
 int Max = 750;
 int MaxYvalue = 500;
-float Yoffset = Ysize/4;
+float Yoffset;
 int[] Speed1 = new int[MaxSpeedData+10]; // Y axis graph data for first value
 int[] Speed2 = new int[MaxSpeedData+10]; // Y axis graph data for second value
 int[] Speed0 = new int[MaxSpeedData+10]; // Y axis graph data for mean value
@@ -399,7 +399,7 @@ void setup()
   if (loadStrings("YscreenSize.cfg") != null)
    {
      Zoom = loadStrings("YscreenSize.cfg");
-     ZoomFactor = (float)(Integer.parseInt(Zoom[0]));
+     ZoomFactor = Float.parseFloat(Zoom[0]);
      if (ZoomFactor < 600)
      {
        ZoomFactor = 600;
@@ -419,6 +419,15 @@ void setup()
   int Xw = Z(XscreenSize); 
   int Yh = Z(YscreenSize);
 
+  W = Z(80);
+  Fheight = 26;
+  RelX = Z(432);
+  RelY = Z(397);
+  RelX0 = Z(57);
+  Ysize = Z(750);
+  Xsize = Z(750);
+  RelY0 = Z(21) + Ysize;
+  Yoffset = Ysize/4;
   size(Xw, Yh);
   smooth();
   

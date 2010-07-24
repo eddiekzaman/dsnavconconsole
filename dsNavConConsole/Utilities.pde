@@ -2,6 +2,7 @@
 int Z(float Num2Scale)
 {
   // Zoom the graphics ZoomFactor = 1 -> 1280 x 800 monitor
+    
   return (int)(Num2Scale * ZoomFactor);
 }
 /*-----------------------------------------------------------------------------*/

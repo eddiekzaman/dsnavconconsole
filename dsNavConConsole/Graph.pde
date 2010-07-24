@@ -86,7 +86,7 @@ void DefineGrid(int MinX, int MaxX, int MinY, int MaxY, int Xstep, int Ystep,
   rotate(HALF_PI);
   for (ind=0; ind <= Xstep; ind++)
   {
-     text(MinX+(ScaleXstep*ind), (ind*GridStepX), 20);
+     text(MinX+(ScaleXstep*ind), (ind*GridStepX), Z(20));
   }
   
   Xscale = get(Z(30), Z(775), Z(800), Z(20));
@@ -254,7 +254,7 @@ void Plot ()
     ptr=(ind+SpeedDataPtr) % MaxInd;
     if (ptr>0)
     {
-      line((Speed1[ptr-1]), IndPrev, (Speed1[ptr]), ind*StepTmp+1);
+      line(Z((Speed1[ptr-1])), (int)(Z(IndPrev)), Z((Speed1[ptr])), (int)(Z(ind*StepTmp+1)));
       IndPrev = (int)(ind*StepTmp);
     }
   }
@@ -273,7 +273,7 @@ void Plot ()
     ptr=(ind+SpeedDataPtr) % MaxInd;
     if (ptr>0)
     {
-      line((Speed2[ptr-1]), IndPrev, (Speed2[ptr]), ind*StepTmp+1);
+      line(Z((Speed2[ptr-1])), (int)(Z(IndPrev)), Z((Speed2[ptr])), (int)(Z(ind*StepTmp+1)));
       IndPrev = (int)(ind*StepTmp);
     }
   }

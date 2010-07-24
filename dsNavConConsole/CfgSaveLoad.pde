@@ -94,6 +94,10 @@ void FillTextFields()
        InputDistKd.setValue(StrCfg[11]);
        InputAxle.setValue(StrCfg[12]);
        InputWheel1.setValue(StrCfg[13]);
+       
+       
+       
+       
        InputWheel2.setValue(StrCfg[14]);
        InputCpr.setValue(StrCfg[15]);
        InputGear.setValue(StrCfg[16]);

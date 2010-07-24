@@ -55,7 +55,7 @@ void ConfigPanel()  // Config panel controls
     
     BtnRun.display();
     BtnRun.update();
-    
+   
     textFont(CharFont, Z(8)); 
     
     BtnSeqL.update();
