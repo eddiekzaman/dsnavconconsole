@@ -458,10 +458,10 @@ void setup()
 //  DetailValues.flush();
   
  //  BlankGrid = get(57,21,751,751);
-  LedRedOn = loadImage("LedRedOn.gif");
-  LedRedOn.resize(Z(LedRedOn.width),0);
   LedRedOff = loadImage("LedRedOff.gif");
   LedRedOff.resize(Z(LedRedOff.width),0);
+  LedRedOn = loadImage("LedRedOn.gif");
+  LedRedOn.resize(Z(LedRedOn.width),0);
   LedGreenOn = loadImage("LedGreenOn.gif");
   LedGreenOn.resize(Z(LedGreenOn.width),0);
   LedGreenOff = loadImage("LedGreenOff.gif");
@@ -614,7 +614,7 @@ void draw()
                 Ypos = Int16toint32((RxBuff[HeadLen+6] << 8) + (RxBuff[HeadLen+7]));
                 MesAngle = Int16toint32((RxBuff[HeadLen+8] << 8) + (RxBuff[HeadLen+9]));
                 CompassAngle = (Int16toint32((RxBuff[HeadLen+10] << 8) + (RxBuff[HeadLen+11]))) / 10;
-                IdlePerc = RxBuff[HeadLen+10];
+                IdlePerc = RxBuff[HeadLen+12];
  //               MeanValues.print(hour()+":"+minute()+":"+second()+"    "+MesSpeed+" "+Current+" "+Xpos+" "+Ypos+" "+MesAngle+" "+IdlePerc); 
  //               MeanValues.println();
                }

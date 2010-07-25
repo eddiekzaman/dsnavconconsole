@@ -69,8 +69,8 @@ boolean RxData(char Cmd,int Len)
       {
         RS232Port.clear();
         textAlign(LEFT);
-        text("RX error:",1040,710);
-        text("ChkSum err",1040,725);
+        text("RX error:",Z(1040),Z(710));
+        text("ChkSum err",Z(1040),Z(725));
         text("Expected: "+RxBuff[i],Z(1040),Z(740));
         text("Found: " + ChkSum,Z(1040),Z(755));
         textAlign(CENTER);

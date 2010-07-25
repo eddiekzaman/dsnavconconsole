@@ -39,7 +39,7 @@ void LedBlink()
     
   if (TxFlag)  // blink red (TX) led
   {
-    image(LedRedOn,Z(1230),(700));
+    image(LedRedOn,Z(1230),Z((700)));
   }
   else
   {
