@@ -294,7 +294,7 @@ int IdleCount = 0;
 int IdleTime = 0;
 int IdleTimeP = 0;
 
-float CharTime = (0.2); // time period in ms for a char sent on RS232
+float CharTime; // time period in ms for a char sent on RS232
 
 int[] RxBuff = new int[128];
 
@@ -605,7 +605,6 @@ void draw()
             if (!PreInitRS232Flag && !StopFlag)
             {
               TxData(0, 'A', 0, 3);  // ask for all parameters
-              Delay(3);              // wait for data to be received
               if (RxData('A',13))
               {// two bytes -> i int
                 MesSpeed = Int16toint32(((RxBuff[HeadLen] << 8) + (RxBuff[HeadLen+1])));
@@ -630,7 +629,6 @@ void draw()
             if (!PreInitRS232Flag && !StopFlag)
             {
               TxData(0, 'a', 0, 3);  // ask for all parameters
-              Delay(3);              // wait for data to be received
               if (RxData('a',12))
               {// two bytes -> i int
                 Speed1[SpeedDataPtr] = Int16toint32(((RxBuff[HeadLen] << 8) + (RxBuff[HeadLen+1])));

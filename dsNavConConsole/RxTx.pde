@@ -2,7 +2,9 @@
 boolean RxData(char Cmd,int Len)
 {
   int ChkSum = 0;
-
+  
+  Delay(Len);              // wait for data to be received
+  
   if (! PreInitRS232Flag)  // RS232 initialized
   {
         if (RS232Port.available() <= 0)
@@ -147,6 +149,8 @@ void TxData(int Id, int Cmd, int ValueLen, int IntFlag)
    }
       
   if (IntFlag != 3) TxFlag = true; // avoid to blink TX led for continuos send
+  
+  Delay(ValueLen);              // wait for data to be transmitted
 }
 
 /*-----------------------------------------------------------------------------

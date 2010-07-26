@@ -17,12 +17,13 @@ void StandardFont()
 void Delay(int Bytes)
 {
    /* wait for data to be received for a time (in ms) proportional to 
-      num of bytes: data bytes + TX overhead + RX overhead (Bytes+5+5)
+      num of bytes: data bytes + overhead (Bytes+5)
    */
-   Bytes += 10;
+   Bytes += 5;
    int Del= (int)((CharTime * Bytes) + 0.5);
    int StartDelay = millis();
    while ((millis()-StartDelay) < Del);
+   println(CharTime+" ......"+Del+"   "+(StartDelay-millis()));
 }
 
 /*-----------------------------------------------------------------------------*/

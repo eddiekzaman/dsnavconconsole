@@ -168,8 +168,6 @@ void ConfigPanel()  // Config panel controls
       TxIntValue[1] = (int)(Ksp1);
       TxIntValue[2] = (int)(Ksp2);
       TxData(0, 'M', 3, 2);
-
-      Delay(2);
       
       Kvel1=(Wheel1*PI*Fcy*32768) /(Cpr*Gear*1000) ;
       Kvel2=(Wheel2*PI*Fcy*32768) /(Cpr*Gear*1000) ;
@@ -203,7 +201,7 @@ void ConfigPanel()  // Config panel controls
             }
 
             PreInitRS232Flag = false;          // turn ON real RS232 sending
-            CharTime = (115200 / RS232Bps) * 1.5; // waiting time is a function of bps
+            CharTime = 1/(float)(RS232Bps)*30000;       // waiting time is a function of bps with a 50% margin
             RS232Port.clear();
          }
          else
@@ -227,7 +225,7 @@ void ConfigPanel()  // Config panel controls
     if (BtnSendError.released)
     {
       TxData(0, 'e', 0, 1);
-      Delay(2);              // wait for data to be received
+
       if (RxData('e',2))
       {// two bytes -> i int
         ErrorCode = Int16toint32(((RxBuff[HeadLen] << 8) + (RxBuff[HeadLen+1])));

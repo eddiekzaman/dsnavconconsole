@@ -184,7 +184,6 @@ void ButtonVersion()
     {
       int VerLen = 26;
       TxData(0, 'R', 0, 1);  // ask for all parameters
-      Delay(VerLen);         // wait for data to be received
       
       if (PreInitRS232Flag)
       {
@@ -242,7 +241,7 @@ void ButtonMap()
       {
         TxIntValue[0] = Yindx;  // request a row of grid map matrix
         TxData(0, '$', 1, 0);
-        Delay(20);    // enough time to receive 80 bytes at 57600 bps
+
         if (RxData('$',MapXsizeR+6))
         {
           MapSendIndx = RxBuff[HeadLen]; // normalized index of the current row on field map matrix
