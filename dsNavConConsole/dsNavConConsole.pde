@@ -390,6 +390,13 @@ float ZoomFactor;
 String[] Zoom = new String[1]; // Scaling factor. Max range = 75 - 120
 int XscreenSize = 1295;
 int YscreenSize = 815;
+
+String RxErrorText = new String ("--RX OK--");
+char RxErrorExpected;
+char RxErrorFound;
+int RxErrorDispTime = 0;
+
+
 /*/////////////////////////////////////////////////////////////////////////////*/
 
 void setup()
@@ -581,9 +588,27 @@ void draw()
   
   text(IdleTimeP/100, Z(1210), Z(760));
   text("Cycle",Z(1210), Z(740));
-  
-  text(Err, Z(1240), Z(760));
+
   text("TX", Z(1240), Z(740));
+  
+  textAlign(LEFT);
+  text("RX errors: "+Err,Z(1040),Z(710));
+  
+  if (RxErrorDispTime > 0)
+  {
+    text(RxErrorText,Z(1040),Z(725));
+    text("Expected: "+RxErrorExpected,Z(1040),Z(740));
+    text("Found: "+RxErrorFound,Z(1040),Z(755));
+    RxErrorDispTime --;
+  }
+  else
+  {
+    text("             ",Z(1040),Z(725));
+    text("             ",Z(1040),Z(740));
+    text("             ",Z(1040),Z(755));
+  }
+  
+  textAlign(CENTER);
   
   if ((millis()-Cycle) > CyclePeriod)  // slow loop start------------------------
   {

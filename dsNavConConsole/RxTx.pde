@@ -1,4 +1,52 @@
 /*-----------------------------------------------------------------------------*/
+void RxError(int ErrCode, char Cmd, int Len, int ChkSum)
+{
+  RS232Port.clear();
+  RxErrorDispTime = 100;
+  
+  switch (ErrCode)
+  {
+    case 1: // Timeout
+      RxErrorText= "TMO - No RX";
+      RxErrorExpected = ' ';
+      RxErrorFound = ' ';
+    break;
+    
+    case 2: // no header found
+      RxErrorText= "No Header";
+      RxErrorExpected = '@';
+      RxErrorFound =(char)(RxBuff[0]);
+    break;
+    
+    case 3: // the command received doesn't match what expected
+      RxErrorText= "Wrong CMD";
+      RxErrorExpected = Cmd;
+      RxErrorFound = (char)(RxBuff[2]);
+    break;
+      
+    case 4:
+      RxErrorText= "Wrong LEN";
+      RxErrorExpected = (char)(Len);
+      RxErrorFound = (char)(RxBuff[3]-1);
+    break;
+
+    case 5:
+      RxErrorText= "ChkSum err";
+      RxErrorExpected = (char)(+RxBuff[i]);
+      RxErrorFound = (char)(ChkSum);
+    break;
+
+    default:
+      RxErrorText= "--RX OK--";
+      RxErrorExpected = ' ';
+      RxErrorFound =  ' ';
+    break;
+  
+  }
+  
+  Err++;
+} 
+/*-----------------------------------------------------------------------------*/
 boolean RxData(char Cmd,int Len)
 {
   int ChkSum = 0;
@@ -9,12 +57,7 @@ boolean RxData(char Cmd,int Len)
   {
         if (RS232Port.available() <= 0)
         {
-          RS232Port.clear();
-          textAlign(LEFT);
-          text("RX error:",Z(1040),Z(710));
-          text("TMO - No RX",Z(1040),Z(725));;
-          textAlign(CENTER);
-          Err++;
+          RxError(1, Cmd, Len, ChkSum);
           return false;
         }
         else
@@ -27,38 +70,17 @@ boolean RxData(char Cmd,int Len)
       
       if (RxBuff[0] != '@')
       {
-        RS232Port.clear();
-        textAlign(LEFT);
-        text("RX error:",Z(1040),Z(710));
-        text("No Header",Z(1040),Z(725));
-        text("Expected: @",Z(1040),Z(740));
-        text("Found: " + (char)(RxBuff[0]),Z(1040),Z(755));
-        textAlign(CENTER);
-        Err++;
+        RxError(2, Cmd, Len, ChkSum);
         return false;
       }
       else if (RxBuff[2] != Cmd)
       {
-        RS232Port.clear();
-        textAlign(LEFT);
-        text("RX error:",Z(1040),Z(710));
-        text("Wrong CMD",Z(1040),Z(725));
-        text("Expected: "+Cmd,1040,740);
-        text("Found: " + (char)(RxBuff[2]),Z(1040),Z(755));
-        textAlign(CENTER);
-        Err++;
+        RxError(3, Cmd, Len, ChkSum);
         return false;
       }
       else if (RxBuff[3] != (Len+1))
       {
-        RS232Port.clear();
-        textAlign(LEFT);
-        text("RX error:",Z(1040),Z(710));
-        text("Wrong LEN",Z(1040),Z(725));
-        text("Expected: "+Len,Z(1040),Z(740));
-        text("Found: " + (RxBuff[3]-1),Z(1040),Z(755));
-        textAlign(CENTER);
-        Err++;
+        RxError(4, Cmd, Len, ChkSum);
         return false;
       }
       
@@ -69,14 +91,7 @@ boolean RxData(char Cmd,int Len)
       ChkSum = ChkSum % 256;
       if (RxBuff[i] != ChkSum)
       {
-        RS232Port.clear();
-        textAlign(LEFT);
-        text("RX error:",Z(1040),Z(710));
-        text("ChkSum err",Z(1040),Z(725));
-        text("Expected: "+RxBuff[i],Z(1040),Z(740));
-        text("Found: " + ChkSum,Z(1040),Z(755));
-        textAlign(CENTER);
-        Err++;
+        RxError(5, Cmd, Len, ChkSum);
         return false;
       }
       image(LedYellowOn,Z(1169),Z(700));
