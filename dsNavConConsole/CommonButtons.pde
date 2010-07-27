@@ -184,11 +184,6 @@ void ButtonVersion()
     {
       int VerLen = 26;
       TxData(0, 'R', 0, 1);  // ask for all parameters
-      
-      if (PreInitRS232Flag)
-      {
-        SimulationRxVer();      // simulation
-      }
     
       if (RxData('R',VerLen))
       {
