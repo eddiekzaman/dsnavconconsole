@@ -391,6 +391,14 @@ String[] Zoom = new String[1]; // Scaling factor. Max range = 75 - 120
 int XscreenSize = 1295;
 int YscreenSize = 815;
 
+// LEDs position
+int LYx = 1169;
+int LYy = 706;
+int LRx = 1230;
+int LRy = 706;
+int LGx = 1200;
+int LGy = 706;
+
 String RxErrorText = new String ("--RX OK--");
 char RxErrorExpected;
 char RxErrorFound;
@@ -574,7 +582,7 @@ void draw()
     break;
   }
 
-  image(LedYellowOff,Z(1169),Z(700));
+  image(LedYellowOff,Z(LYx),Z(LYy));
   IdleCount++;     // count idle period in ms
   if(IdleCount > 100)
   {
@@ -583,13 +591,23 @@ void draw()
     IdleTime=millis();
   }
   textAlign(CENTER);
-  text(IdlePerc,Z(1177),Z(760));
-  text("RX",Z(1177),Z(740));
-  
-  text(IdleTimeP/100, Z(1210), Z(760));
-  text("Cycle",Z(1210), Z(740));
 
-  text("TX", Z(1240), Z(740));
+  text("RX",Z(1177),Z(700));
+  text("Cycle",Z(1210), Z(700));
+  text("TX", Z(1240), Z(700));
+  
+  textAlign(LEFT);
+  
+  text("dsNav ",Z(1170),Z(745));
+  text("GUI   ",Z(1170),Z(760));
+  
+  textAlign(RIGHT);
+  text(IdlePerc,Z(1235),Z(745));
+  text(CyclePeriod-(IdleTimeP/100), Z(1235), Z(760));
+
+  textAlign(LEFT);
+  text("%",Z(1235),Z(745));
+  text("%", Z(1235), Z(760));
   
   textAlign(LEFT);
   text("RX errors: "+Err,Z(1040),Z(710));

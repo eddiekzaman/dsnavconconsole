@@ -1,9 +1,10 @@
 /*-----------------------------------------------------------------------------*/
 void RxError(int ErrCode, char Cmd, int Len, int ChkSum)
 {
+  int Dummy;
   while (RS232Port.available() > 0) // flush RX buffer
   {
-     RxBuff[i] = (RS232Port.read());
+     Dummy = (RS232Port.read());
   }
   RS232Port.clear();
   RxErrorDispTime = 100;
@@ -98,7 +99,7 @@ boolean RxData(char Cmd,int Len)
         RxError(5, Cmd, Len, ChkSum);
         return false;
       }
-      image(LedYellowOn,Z(1169),Z(700));
+      image(LedYellowOn,Z(LYx),Z(LYy));
       return true;
   }
   return false;

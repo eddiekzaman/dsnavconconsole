@@ -31,20 +31,20 @@ void LedBlink()
 {
   if (BlinkFlag)  // blink green (cycle) led
   {
-   image(LedGreenOn,Z(1200),Z(700));
+   image(LedGreenOn,Z(LGx),Z(LGy));
   }
   else
   {
-   image(LedGreenOff,Z(1200),Z(700));
+   image(LedGreenOff,Z(LGx),Z(LGy));
   }
     
   if (TxFlag)  // blink red (TX) led
   {
-    image(LedRedOn,Z(1230),Z((700)));
+    image(LedRedOn,Z(LRx),Z((LRy)));
   }
   else
   {
-    image(LedRedOff,Z(1230),Z(700));
+    image(LedRedOff,Z(LRx),Z(LRy));
     TxTimer = millis();
   }
   if ((millis() - TxTimer) >= TxPeriod)
