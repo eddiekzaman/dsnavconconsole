@@ -218,6 +218,12 @@ void ConfigPanel()  // Config panel controls
 
        InputRS232Com.setValue(nf(RS232ComPort,0));
        InputRS232bps.setValue(nf(RS232Bps,0));
+       
+        while (RS232Port.available() > 0) // flush RX buffer
+        {
+           RxBuff[i] = (RS232Port.read());
+        }
+        
     }
     BtnSendCfgRS232.display();
     

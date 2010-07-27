@@ -1,6 +1,10 @@
 /*-----------------------------------------------------------------------------*/
 void RxError(int ErrCode, char Cmd, int Len, int ChkSum)
 {
+  while (RS232Port.available() > 0) // flush RX buffer
+  {
+     RxBuff[i] = (RS232Port.read());
+  }
   RS232Port.clear();
   RxErrorDispTime = 100;
   
