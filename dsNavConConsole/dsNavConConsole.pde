@@ -403,7 +403,7 @@ String RxErrorText = new String ("--RX OK--");
 char RxErrorExpected;
 char RxErrorFound;
 int RxErrorDispTime = 0;
-
+boolean RxLock = false;
 
 /*/////////////////////////////////////////////////////////////////////////////*/
 

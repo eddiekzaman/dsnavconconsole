@@ -33,7 +33,7 @@ void ButtonStartSeq()
 	    BtnStartSeq.update();
     if (BtnStartSeq.released)
     {
-      TxData(0, '#', 0, 1);
+      TxData(0, '#', 0, 0);
     }
     BtnStartSeq.display();
 }
@@ -95,7 +95,7 @@ void ButtonReset()
     {
       StopFlag = true;
       Delay(10);
-      TxData(0, '*', 0, 1);
+      TxData(0, '*', 0, 0);
     }
     BtnSendReset.display();
 }
@@ -114,7 +114,7 @@ void ButtonHalt()
 /*-----------------------------------------------------------------------------*/  
 void Halt()
 {
-    TxData(0, 'H', 0, 1);
+    TxData(0, 'H', 0, 0);
     SmsFlag = false;
     DesSpeed = 0;     
     InputSpeed.setValue(nf(DesSpeed,3));
@@ -183,13 +183,16 @@ void ButtonVersion()
     if (BtnSendVersion.released)
     {
       int VerLen = 26;
-      TxData(0, 'R', 0, 1);  // ask for all parameters
-    
-      if (RxData('R',VerLen))
+      if (! RxLock)
       {
-        for (i=HeadLen; i < VerLen+HeadLen; i++)
+        TxData(0, 'R', 0, 0);  
+        Delay(100);
+        if (RxData('R',VerLen))
         {
-          Ver[i-HeadLen]= (char)(RxBuff[i]);
+          for (i=HeadLen; i < VerLen+HeadLen; i++)
+          {
+            Ver[i-HeadLen]= (char)(RxBuff[i]);
+          }
         }
       }
     }
@@ -236,7 +239,7 @@ void ButtonMap()
       {
         TxIntValue[0] = Yindx;  // request a row of grid map matrix
         TxData(0, '$', 1, 0);
-
+        Delay(100);
         if (RxData('$',MapXsizeR+6))
         {
           MapSendIndx = RxBuff[HeadLen]; // normalized index of the current row on field map matrix
@@ -244,19 +247,19 @@ void ButtonMap()
           Xshift = Int16toint32(((RxBuff[HeadLen+1] << 8) + (RxBuff[HeadLen+2])));
           Yshift = Int16toint32(((RxBuff[HeadLen+3] << 8) + (RxBuff[HeadLen+4])));
           Ycoord = RealCoord(Yindx, Yshift, MinMapY, MaxMapY, MapYsize);
-          println();  // debug
-          println();  // debug
-          println ("(X:"+Xshift+" Y:"+Yshift+" Ycoord:"+Ycoord+" Yindx:"+Yindx+ ") *** "); // debug
+  //        println();  // debug
+  //        println();  // debug
+  //        println ("(X:"+Xshift+" Y:"+Yshift+" Ycoord:"+Ycoord+" Yindx:"+Yindx+ ") *** "); // debug
           for (Xindx = 0; Xindx < MapXsizeR; Xindx++)
           {
              CellValue=RxBuff[Xindx+HeadLen+5] & 0x0F; // lower nibble
              Xcoord = RealCoord(Xindx*2, Xshift, MinMapX, MaxMapX, MapXsize);
              Objects(Xcoord, Ycoord, CellValue);
              CellValue=(RxBuff[Xindx+HeadLen+5] & 0xF0) >> 4; // upper nibble
-             print("("+Xcoord+" "+CellValue+")  ");  // debug
+ //            print("("+Xcoord+" "+CellValue+")  ");  // debug
              Xcoord = RealCoord(Xindx*2+1, Xshift, MinMapX, MaxMapX, MapXsize);
              Objects(Xcoord, Ycoord, CellValue);
-             print("("+Xcoord+" "+CellValue+") ");  // debug
+//             print("("+Xcoord+" "+CellValue+") ");  // debug
           }
         }
       }

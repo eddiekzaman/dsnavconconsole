@@ -23,7 +23,7 @@ void Delay(int Bytes)
    int Del= (int)((CharTime * Bytes) + 0.5);
    int StartDelay = millis();
    while ((millis()-StartDelay) < Del);
-   println(CharTime+" ......"+Del+"   "+(StartDelay-millis()));
+ //  println(CharTime+" ......"+Del+"   "+(StartDelay-millis()));
 }
 
 /*-----------------------------------------------------------------------------*/

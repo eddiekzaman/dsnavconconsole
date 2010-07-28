@@ -173,8 +173,8 @@ void ConfigPanel()  // Config panel controls
       Kvel2=(Wheel2*PI*Fcy*32768) /(Cpr*Gear*1000) ;
       TxIntValue[0] = (int)(Kvel1);
       TxIntValue[1] = (int)(Kvel2);
-      print("Kvel1-"+TxIntValue[0] + "  Kvel2-"+TxIntValue[1]);
-      println("  Axle-"+K/100+"  Ksp1 long-"+Ksp1+"  Ksp2-"+Ksp2);
+//      print("Kvel1-"+TxIntValue[0] + "  Kvel2-"+TxIntValue[1]);
+//      println("  Axle-"+K/100+"  Ksp1 long-"+Ksp1+"  Ksp2-"+Ksp2);
       TxData(0, 'L', 2, 2);
     }
     BtnSendCfgWheels.display();
@@ -201,7 +201,7 @@ void ConfigPanel()  // Config panel controls
             }
 
             PreInitRS232Flag = false;          // turn ON real RS232 sending
-            CharTime = 1/(float)(RS232Bps)*30000;       // waiting time is a function of bps with a 50% margin
+            CharTime = 1/(float)(RS232Bps)*15000;       // waiting time is a function of bps with a 50% margin
             RS232Port.clear();
          }
          else
@@ -218,10 +218,10 @@ void ConfigPanel()  // Config panel controls
 
        InputRS232Com.setValue(nf(RS232ComPort,0));
        InputRS232bps.setValue(nf(RS232Bps,0));
-       
+        int Dummy;
         while (RS232Port.available() > 0) // flush RX buffer
         {
-           RxBuff[i] = (RS232Port.read());
+           Dummy = (RS232Port.read());
         }
         
     }

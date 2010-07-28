@@ -2,6 +2,7 @@
 void RxError(int ErrCode, char Cmd, int Len, int ChkSum)
 {
   int Dummy;
+  RxLock = false;
   while (RS232Port.available() > 0) // flush RX buffer
   {
      Dummy = (RS232Port.read());
@@ -57,21 +58,23 @@ boolean RxData(char Cmd,int Len)
   int ChkSum = 0;
   
   Delay(Len);              // wait for data to be received
-  
+  RxLock = false;
   if (! PreInitRS232Flag)  // RS232 initialized
   {
-        if (RS232Port.available() <= 0)
+      if (RS232Port.available() <= 0)
+      {
+        RxError(1, Cmd, Len, ChkSum);
+        return false;
+      }
+      else
+      {
+        for (i=0; i < Len+HeadLen+1; i++)  // loop for all data expected and only for that
         {
-          RxError(1, Cmd, Len, ChkSum);
-          return false;
+          RxBuff[i] = (RS232Port.read());
+ //         println(int(RxBuff[i])+"     "+i);
         }
-        else
-        {
-          for (i=0; i < Len+HeadLen+1; i++)  // loop for all data expected and only for that
-          {
-            RxBuff[i] = (RS232Port.read());
-          }
-        }
+      }
+//      println("-----");
       
       if (RxBuff[0] != '@')
       {
@@ -120,6 +123,7 @@ void TxData(int Id, int Cmd, int ValueLen, int IntFlag)
     return;
   }
   
+  RxLock = true;
   if (IntFlag == 0)  // byte value
   {
     CmdLen = ValueLen;  
