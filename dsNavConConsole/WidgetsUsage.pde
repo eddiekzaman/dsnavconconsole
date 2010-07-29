@@ -201,7 +201,6 @@ void ConfigPanel()  // Config panel controls
             }
 
             PreInitRS232Flag = false;          // turn ON real RS232 sending
-            CharTime = 1/(float)(RS232Bps)*15000;       // waiting time is a function of bps with a 50% margin
             RS232Port.clear();
          }
          else

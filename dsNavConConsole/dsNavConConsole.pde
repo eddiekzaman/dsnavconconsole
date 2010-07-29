@@ -294,8 +294,6 @@ int IdleCount = 0;
 int IdleTime = 0;
 int IdleTimeP = 0;
 
-float CharTime; // time period in ms for a char sent on RS232
-
 int[] RxBuff = new int[128];
 
 int Err = 0;
@@ -403,7 +401,6 @@ String RxErrorText = new String ("--RX OK--");
 char RxErrorExpected;
 char RxErrorFound;
 int RxErrorDispTime = 0;
-boolean RxLock = false;
 
 /*/////////////////////////////////////////////////////////////////////////////*/
 

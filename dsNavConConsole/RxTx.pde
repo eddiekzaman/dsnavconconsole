@@ -1,15 +1,8 @@
 /*-----------------------------------------------------------------------------*/
 void RxError(int ErrCode, char Cmd, int Len, int ChkSum)
 {
-  int Dummy;
-  RxLock = false;
-  while (RS232Port.available() > 0) // flush RX buffer
-  {
-     Dummy = (RS232Port.read());
-  }
   RS232Port.clear();
   RxErrorDispTime = 100;
-  
   switch (ErrCode)
   {
     case 1: // Timeout
@@ -56,25 +49,25 @@ void RxError(int ErrCode, char Cmd, int Len, int ChkSum)
 boolean RxData(char Cmd,int Len)
 {
   int ChkSum = 0;
+  int StartTime;
+  int Timeout=1000; //ms
   
-  Delay(Len);              // wait for data to be received
-  RxLock = false;
   if (! PreInitRS232Flag)  // RS232 initialized
   {
-      if (RS232Port.available() <= 0)
+      StartTime=millis();
+      while (RS232Port.available() <= (Len+HeadLen)) // wait data
       {
-        RxError(1, Cmd, Len, ChkSum);
-        return false;
-      }
-      else
-      {
-        for (i=0; i < Len+HeadLen+1; i++)  // loop for all data expected and only for that
+        if((millis()-StartTime) > Timeout)
         {
-          RxBuff[i] = (RS232Port.read());
- //         println(int(RxBuff[i])+"     "+i);
+          RxError(1, Cmd, Len, ChkSum);
+          return false;
         }
       }
-//      println("-----");
+      
+      for (i=0; i < Len+HeadLen+1; i++)  // loop for all data expected and only for that
+      {
+        RxBuff[i] = (RS232Port.read());
+      }
       
       if (RxBuff[0] != '@')
       {
@@ -97,6 +90,7 @@ boolean RxData(char Cmd,int Len)
         ChkSum += (char)(RxBuff[i]);
       }
       ChkSum = ChkSum % 256;
+      
       if (RxBuff[i] != ChkSum)
       {
         RxError(5, Cmd, Len, ChkSum);
@@ -123,7 +117,6 @@ void TxData(int Id, int Cmd, int ValueLen, int IntFlag)
     return;
   }
   
-  RxLock = true;
   if (IntFlag == 0)  // byte value
   {
     CmdLen = ValueLen;  
@@ -169,20 +162,9 @@ void TxData(int Id, int Cmd, int ValueLen, int IntFlag)
   for (i=0;i<(TxHeadLen+CmdLen+1);i++) 
   {
     RS232Port.write(TxBuff[i]);
-//    println(TxBuff[i]);
    }
       
   if (IntFlag != 3) TxFlag = true; // avoid to blink TX led for continuos send
-  
-  Delay(ValueLen);              // wait for data to be transmitted
 }
 
-/*-----------------------------------------------------------------------------
-void serialEvent(Serial p) 
-{ 
-    RxBuff[RxBuffCount] = (byte)(RS232Port.read());
-        println(RxBuffCount+ " " +(char)(RxBuff[RxBuffCount]));
-    RxBuffCount++;
-}
-*/
 

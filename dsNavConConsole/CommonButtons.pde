@@ -94,7 +94,6 @@ void ButtonReset()
     if (BtnSendReset.released)
     {
       StopFlag = true;
-      Delay(10);
       TxData(0, '*', 0, 0);
     }
     BtnSendReset.display();
@@ -183,16 +182,12 @@ void ButtonVersion()
     if (BtnSendVersion.released)
     {
       int VerLen = 26;
-      if (! RxLock)
+      TxData(0, 'R', 0, 0);  
+      if (RxData('R',VerLen))
       {
-        TxData(0, 'R', 0, 0);  
-        Delay(100);
-        if (RxData('R',VerLen))
+        for (i=HeadLen; i < VerLen+HeadLen; i++)
         {
-          for (i=HeadLen; i < VerLen+HeadLen; i++)
-          {
-            Ver[i-HeadLen]= (char)(RxBuff[i]);
-          }
+          Ver[i-HeadLen]= (char)(RxBuff[i]);
         }
       }
     }
@@ -233,13 +228,12 @@ void ButtonMap()
       TxIntValue[0] = 0;
       TxData(0, 'S', 1, 1);
       
-      Delay(1000);
+      delay(1000);
       
       for (Yindx = 0; Yindx < MapYsize; Yindx++)
       {
         TxIntValue[0] = Yindx;  // request a row of grid map matrix
         TxData(0, '$', 1, 0);
-        Delay(100);
         if (RxData('$',MapXsizeR+6))
         {
           MapSendIndx = RxBuff[HeadLen]; // normalized index of the current row on field map matrix
