@@ -402,6 +402,8 @@ char RxErrorExpected;
 char RxErrorFound;
 int RxErrorDispTime = 0;
 
+boolean TxMapFlag=false;
+
 /*/////////////////////////////////////////////////////////////////////////////*/
 
 void setup()
@@ -607,7 +609,16 @@ void draw()
   text("%", Z(1235), Z(760));
   
   textAlign(LEFT);
-  text("RX errors: "+Err,Z(1040),Z(710));
+  if (TxMapFlag)
+  {
+    fill(255,0,0);
+    text("PLEASE WAIT ",Z(1040),Z(710));
+  }
+  else
+  {
+    fill(255,255,255);
+    text("RX errors: "+Err,Z(1040),Z(710));
+  }
   
   if (RxErrorDispTime > 0)
   {

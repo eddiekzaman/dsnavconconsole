@@ -221,13 +221,10 @@ void ButtonMap()
     int CellValue;
     
     BtnMap.update();
-    if (BtnMap.released)
+    
+    if (TxMapFlag)
     {
-      StopFlag=true;
-      controlP5.controller("bar").setValue(0);  // stop the motors
-      TxIntValue[0] = 0;
-      TxData(0, 'S', 1, 1);
-      
+      TxMapFlag=false;
       delay(1000);
       
       for (Yindx = 0; Yindx < MapYsize; Yindx++)
@@ -256,7 +253,17 @@ void ButtonMap()
 //             print("("+Xcoord+" "+CellValue+") ");  // debug
           }
         }
-      }
+      }    
+    }
+    
+    if (BtnMap.released)
+    {
+      StopFlag=true;
+      TxMapFlag=true;
+      controlP5.controller("bar").setValue(0);  // stop the motors
+      TxIntValue[0] = 0;
+      TxData(0, 'S', 1, 1);
+      BtnStopOn.display();
     }
     BtnMap.display();
 }
