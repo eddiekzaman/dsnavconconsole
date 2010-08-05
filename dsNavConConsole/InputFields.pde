@@ -273,6 +273,12 @@ void InputFieldsDefinition()
   InputCycle.addActionListener(this);
   InputCycle.setHeight(Z(Fheight));
   
+  C[38][0] = Z(148);
+  C[38][1] = Z(457);    
+  InputCam = new IFTextField("", C[38][0], C[38][1], W);
+  InputCam.addActionListener(this);
+  InputCam.setHeight(Z(Fheight));
+  
    // Define and create input fields for Sequencer panel  *************************
   GuiSequencer1 = new GUIController(this);
   int i;
@@ -642,6 +648,7 @@ void SetInputFieldsConfig()    // input fields for Config panel
   GuiConfig2.add(InputDGYSteps);
   GuiConfig2.add(InputDGset);
   GuiConfig2.add(InputCycle);
+  GuiConfig2.add(InputCam);
 }
 
 /*-----------------------------------------------------------------------------*/
@@ -764,7 +771,7 @@ void ConfigPanelText()
   int x = 5;
   int y = 3;
   int z = 15;
-  String[] Descr = new String[38];
+  String[] Descr = new String[40];
   Descr[0] = "Kp x 10.000";
   Descr[1] = "Ki x 10.000";
   Descr[2] = "Kd x 10.000";
@@ -803,8 +810,9 @@ void ConfigPanelText()
   Descr[35] = "Y steps s.";
   Descr[36] = "Set #";
   Descr[37] = "ms";
+  Descr[38] = "";
 
-  for (i=0; i<38; i++)
+  for (i=0; i<39; i++)
     {
       image (InputField,C[i][0]-x, C[i][1]-y);
       textAlign(CENTER);
@@ -814,6 +822,7 @@ void ConfigPanelText()
       text ("Main Panel Grid",(C[22][0]+W+z), (C[22][1]+z));
       text ("Detail Panel Grid",(C[31][0]+W+z), (C[31][1]+z));
       text ("Cycle time",(C[37][0]+W+z), (C[37][1]+z));
+      text ("Web Cam",(C[38][0]+W+z), (C[38][1]+z));
       textAlign(RIGHT);
       text ("Speed R",(C[0][0]-z), (C[0][1]+z));
       text ("Speed L",(C[3][0]-z), (C[3][1]+z));

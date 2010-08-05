@@ -26,6 +26,8 @@ void DefineButtons()
   BtnSendXY = new ImageButtons(Z(1170), Z(600), "Send", 1);
   BtnSendVersion = new ImageButtons(Z(1170), Z(650), "Version", 1);
   BtnSendHalt = new ImageButtons(Z(845), Z(685), "Halt", 1);
+  BtnCamOn = new ImageButtons(Z(845), Z(650), "Cam Off", 0);
+  BtnCamOff = new ImageButtons(Z(845), Z(650), "Cam On", 1);
   BtnSendReset = new ImageButtons(Z(945), Z(685), "Reset", 1);
   BtnStartSeq = new ImageButtons(Z(845), Z(500), "Start Seq", 1);
   BtnDebugOff = new ImageButtons(Z(845), Z(738), "Debug On", 1);
@@ -53,6 +55,7 @@ void DefineButtons()
   BtnSendDetailGrid = new ImageButtons(Z(35), Z(229), "Send", 1);
   BtnSendDetailSet = new ImageButtons(Z(35), Z(342), "Send", 1);
   BtnSendCycle = new ImageButtons(Z(35), Z(399), "Send", 1);
+  BtnSendCam = new ImageButtons(Z(35), Z(456), "Send", 1);
     
   // Define and create image button for Sequencer panel **********************  
   BtnSeqL = new ImageButtons(Z(945), Z(772), "Sequencer", 1);

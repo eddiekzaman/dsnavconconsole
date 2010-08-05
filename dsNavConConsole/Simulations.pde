@@ -5,7 +5,10 @@ void SimulationDrawing()
     Distance += DeltaDist;
     DeltaX = DeltaDist * (sin(MesAngle + HALF_PI));
     DeltaY = DeltaDist * (cos(MesAngle + HALF_PI));
-    Graph(DeltaX+PrevXtmp,DeltaY+PrevYtmp);
+    if (!CamFlag)
+    {
+      Graph(DeltaX+PrevXtmp,DeltaY+PrevYtmp);
+    }
     Xpos=DeltaX+PrevXtmp;
     Ypos=DeltaY+PrevYtmp;
     PrevXtmp = DeltaX+PrevXtmp;

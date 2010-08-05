@@ -1,9 +1,22 @@
 /*-----------------------------------------------------------------------------*/  
 void MainPanel()  // Main panel controls
 {
-    Grid = get(Z(57),Z(21),Z(751),Z(751));
-    background(bg);
-    image(Grid,Z(57),Z(21));
+    if (CamFlag)
+    {
+      background(bg);
+      image(Grid,Z(57),Z(21));
+      fill(75,75,75);
+      rect(Z(60),Z(25),Z(745),Z(745));
+      image(Cam, Z(60), Z(118));
+      fill(255,255,255);
+    }
+    else
+    {
+      Grid = get(Z(57),Z(21),Z(751),Z(751));
+      background(bg);
+      image(Grid,Z(57),Z(21));
+    }
+
     image(Xscale,Z(30),Z(775));
     image(Yscale,Z(10),Z(10));
     
@@ -22,6 +35,31 @@ void MainPanel()  // Main panel controls
     ButtonVersion();   
     ButtonSim();
     ButtonMap();
+    
+    if (CamFlag)
+    {
+      BtnCamOn.update();
+      if (BtnCamOn.released)
+      {
+        CamFlag=false;
+        DefineMainGrid();
+        Grid = get(Z(57),Z(21),Z(751),Z(751));
+      }
+      BtnCamOn.display();
+    }
+    else
+    {
+      BtnCamOn.display();
+      BtnCamOff.update();
+      if (BtnCamOff.released)
+      {
+        if (CamOkFlag)
+        {
+          CamFlag=true;
+        }
+      }
+      BtnCamOff.display();
+    }
     
     Knob(1162, 333, 0, 360, 0, 360, 12, "Des.Angle=", "°" ); 
     GaugeAngle();
@@ -499,7 +537,49 @@ void ConfigPanel()  // Config panel controls
       InputCycle.setValue(nf(CyclePeriod,0));
     }
     BtnSendCycle.display();
-   
+    
+      StandardFont();
+      textAlign(LEFT);
+
+      text("Available WebCams:",Z(250),Z(510));
+      for(i=0;i<(CaptureList.length);i++)
+      {
+        if (i == CamNum)
+        {
+          fill(0,100,255);
+        }
+        else
+        {
+          fill(255,255,255);
+        }
+        text(i + " = " + CaptureList[i],Z(260),Z(530) + (i*20));
+      }
+      fill(255,255,255);
+    
+    BtnSendCam.update();
+    if (BtnSendCam.released)
+    {
+       CamNum = RangeCheckInt(InputCam.getValue(),0,CaptureList.length);
+
+       InputCam.setValue(nf(CamNum,0));
+       try
+       {
+         if(CamOkFlag)
+         {
+           Cam.stop();
+         }
+         Cam = new Capture(this, Z(745), Z(558), CaptureList[CamNum], 30);
+         Cam.frameRate(10);
+         CamOkFlag = true;
+       }
+       catch(Exception e)    // not a valid Cam
+       {
+         CamNum = 99;
+         InputCam.setValue("ERROR");
+       }
+    }
+    BtnSendCam.display();
+    
       StandardFont();
       textAlign(LEFT);
       text("Available COM ports:",Z(800),Z(480));

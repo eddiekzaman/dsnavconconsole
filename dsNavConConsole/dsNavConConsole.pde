@@ -26,6 +26,8 @@ g.ottaviani@mediaprogetti.it
 import processing.serial.*;
 import interfascia.*;
 import controlP5.*;
+import processing.video.*;
+
 // import sms.*; //Sudden Motion Sensor
 
 // ************************** input text fields
@@ -77,6 +79,7 @@ IFTextField InputDGXSteps;
 IFTextField InputDGYSteps;
 IFTextField InputDGset;
 IFTextField InputCycle;
+IFTextField InputCam;
 
 GUIController GuiSequencer1;
 IFTextField Input01Code;
@@ -152,7 +155,7 @@ IFTextField Input16C;
 
 // coordinates and width of input fields
 int[][] M = new int[4][4];
-int[][] C = new int[38][38];
+int[][] C = new int[40][40];
 int[][] Sx = new int[16][4];
 int[][] Sy = new int[16][4];
 
@@ -193,6 +196,9 @@ ImageButtons BtnStopOff;
 ImageButtons BtnStopOn;
 ImageButtons BtnSendError;
 ImageButtons BtnStartSeq;
+ImageButtons BtnSendCam;
+ImageButtons BtnCamOn;
+ImageButtons BtnCamOff;
 
 ImageButtons BtnSendMainGrid;
 ImageButtons BtnSendMainSet;
@@ -282,10 +288,12 @@ boolean TxFlag = false;
 
 Serial RS232Port;
 int RS232ComPort = 99;
+int CamNum=99;
 int RS232Bps;
 
 String[] StrCfg = new String[128];  // config string
 String[] SerialList = new String[0];  // declare an empty string for serial ports list 
+String[] CaptureList = new String[0];  // declare an empty string for Webcam list 
 byte[] TxBuff = new byte[144];  // Transmission buffer
 int TxHeadLen = 4;             // TX header lenght
 int[] TxIntValue = new int[128]; // int value buffer
@@ -404,6 +412,11 @@ int RxErrorDispTime = 0;
 
 boolean TxMapFlag=false;
 
+boolean CamFlag=false;
+boolean CamOkFlag=false;
+Capture Cam;
+
+
 /*/////////////////////////////////////////////////////////////////////////////*/
 
 void setup()
@@ -512,6 +525,13 @@ void setup()
   
   strokeWeight(3.0);
   stroke(255,0,0);
+
+  i=0;
+  while(i< Capture.list().length)
+  {
+    CaptureList = (append(CaptureList, Capture.list()[i]));
+    i++;
+  }
   
   if (! SimulationRS232Flag)
   {
@@ -547,6 +567,11 @@ void setup()
   InputFieldsSequencer();
   InputFieldsDetails();
   InputFieldsRun();
+}
+
+void captureEvent(Capture Cam) 
+{
+  Cam.read();
 }
 
 // main loop --------------------------------------------------------------------
@@ -669,7 +694,10 @@ void draw()
  //               MeanValues.println();
                }
             }
-            Graph(Xpos,Ypos);
+            if (!CamFlag)
+            {
+              Graph(Xpos,Ypos);
+            }
           break;
     
           case 2:
@@ -703,7 +731,7 @@ void draw()
           break;
     
           default:
-            Graph(Xpos,Ypos);
+
           break;
         }
     }
