@@ -24,23 +24,23 @@ void LoadCfg()  // Load data from config.txt file
 /*-----------------------------------------------------------------------------*/
 void CfgDefault()
 {//if file config.txt is not present a new one is created with defaults
-      StrCfg[0] = "6000";
-      StrCfg[1] = "2000";
-      StrCfg[2] = "200";
-      StrCfg[3] = "6000";
-      StrCfg[4] = "2000";
-      StrCfg[5] = "200";
+      StrCfg[0] = "9000";
+      StrCfg[1] = "7000";
+      StrCfg[2] = "1000";
+      StrCfg[3] = "9000";
+      StrCfg[4] = "7000";
+      StrCfg[5] = "1000";
       StrCfg[6] = "9999";
-      StrCfg[7] = "0";
+      StrCfg[7] = "7000";
       StrCfg[8] = "1";
       StrCfg[9] = "9999";
-      StrCfg[10] = "0";
+      StrCfg[10] = "8000";
       StrCfg[11] = "1";
-      StrCfg[12] = "1852222";
-      StrCfg[13] = "5061455";
-      StrCfg[14] = "5061455";
-      StrCfg[15] = "13145171";
-      StrCfg[16] = "13145171";
+      StrCfg[12] = "184872798";
+      StrCfg[13] = "58040715";
+      StrCfg[14] = "57891660";
+      StrCfg[15] = "300";
+      StrCfg[16] = "30";
       StrCfg[17] = "57600";
       StrCfg[18] = "0";
   
@@ -52,7 +52,7 @@ void CfgDefault()
       StrCfg[24] =  "10";
       StrCfg[25] =  "50";
       StrCfg[26] =  "50";
-      StrCfg[27] =  "0";
+      StrCfg[27] =  "1";
 
       StrCfg[28] =  "-150";
       StrCfg[29] =  "0";

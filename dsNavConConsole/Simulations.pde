@@ -15,24 +15,4 @@ void SimulationDrawing()
     PrevYtmp = DeltaY+PrevYtmp;
 }
 
-void ButtonSim()
- {
-  BtnSim.update();
-  if (BtnSim.released)
-  {
-    if(SimulationDrawFlag==true)
-    {
-      SimulationDrawFlag = false;
-      SimulationRS232Flag = false;
-      Sim=(" ");
-    }
-    else
-    {
-      SimulationDrawFlag = true;
-      SimulationRS232Flag = true;
-      Sim=("SIMULATION");
-    }
-  }
-   // BtnSim.display();
- }
 

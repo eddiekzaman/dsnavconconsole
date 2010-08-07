@@ -122,7 +122,39 @@ void Halt()
 
 /*-----------------------------------------------------------------------------*/  
 void ButtonDebug()
-{
+{/* pressing "CTRL" while clicking, the button changes and allows enabling
+      simulation to test the functionality of the GUI
+      The Simulation button only works if debug is off
+   */
+  if (((keyPressed && (keyCode==17)) || (SimulationDrawFlag)) && (!DebugFlag))
+  {
+    BtnSim.update();
+    if (BtnSim.over || SimulationDrawFlag)
+    {
+      BtnSim.display();
+    }
+    else
+    {
+      BtnDebugOff.display();
+    }
+    if (BtnSim.released)
+    {
+      if(SimulationDrawFlag)
+      {
+      SimulationDrawFlag = false;
+      SimulationRS232Flag = false;
+      Sim=(" ");
+    }
+    else
+    {
+      SimulationDrawFlag = true;
+      SimulationRS232Flag = true;
+      Sim=("SIMULATION");
+    }
+    }
+  }
+  else
+  {
     if (DebugFlag)
     {
       BtnDebugOn.update();
@@ -146,11 +178,41 @@ void ButtonDebug()
       }
       BtnDebugOff.display();
     }
-}
+  } 
+ }
 
 /*-----------------------------------------------------------------------------*/  
 void ButtonStop()
-{
+{  /* pressing "CTRL" while clicking, the button changes and allows enabling
+      direct receiving of the sensors data.
+      The Sensors button only works if normal data receiving is off
+   */
+  if (((keyPressed && (keyCode==17)) || (SensorsFlag)) && (StopFlag))
+  {
+     BtnSensors.update();
+    if (BtnSensors.over || SensorsFlag)
+    {
+      BtnSensors.display();
+    }
+    else
+    {
+      BtnStopOn.display();
+    }
+    
+    if (BtnSensors.released)
+    {
+      if (SensorsFlag)
+      {
+        SensorsFlag = false;
+      }
+      else
+      {
+        SensorsFlag = true;
+      }
+    }
+  }
+  else
+  {
     if (StopFlag)
     {
       BtnStopOn.update();
@@ -173,6 +235,7 @@ void ButtonStop()
       }
       BtnStopOff.display();
     }
+  }
 }
 
 /*-----------------------------------------------------------------------------*/  

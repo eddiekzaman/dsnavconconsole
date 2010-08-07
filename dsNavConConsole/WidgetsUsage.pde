@@ -33,7 +33,7 @@ void MainPanel()  // Main panel controls
     ButtonDebug();
     ButtonStop();
     ButtonVersion();   
-    ButtonSim();
+ //   ButtonSim();
     ButtonMap();
     
     if (CamFlag)

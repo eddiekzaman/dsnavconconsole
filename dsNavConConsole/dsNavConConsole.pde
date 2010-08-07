@@ -1,6 +1,6 @@
 /* ////////////////////////////////////////////////////////////////////////////
 ** File:      dsNavConConsole.pde					    */
- String VerCon = new String ("dsNavConsole 1.6.0 - 07-2010"); //---
+ String VerCon = new String ("dsNavConsole 1.6.0 - 08-2010"); //---
 /* Author:    Guido Ottaviani-->g.ottaviani@mediaprogetti.it<--
 ** Description: navigation control board remote console
 -------------------------------------------------------------------------------
@@ -194,6 +194,7 @@ ImageButtons BtnDebugOff;
 ImageButtons BtnDebugOn;
 ImageButtons BtnStopOff;
 ImageButtons BtnStopOn;
+ImageButtons BtnSensors;
 ImageButtons BtnSendError;
 ImageButtons BtnStartSeq;
 ImageButtons BtnSendCam;
@@ -237,6 +238,9 @@ PImage bP;
 PImage bNr;
 PImage bOr;
 PImage bPr;
+PImage bNg;
+PImage bOg;
+PImage bPg;
 
 // ************************** gauges
 float KnobAngle = -PI/2;
@@ -370,6 +374,7 @@ boolean SimulationDrawFlag = false;
 boolean SimulationCfgFlag = false;
 boolean SimulationRS232Flag = false;
 boolean RS232FirstInit = true;
+boolean SensorsFlag = false;
 
 ControlP5 controlP5;
 int sliderValue = 0;
@@ -509,6 +514,12 @@ void setup()
   bOr.resize(Z(bOr.width),0);
   bPr = loadImage("ReferenceButtonPressedRed.gif");  
   bPr.resize(Z(bPr.width),0);
+  bNg = loadImage("ReferenceButtonNormalGreen.gif");
+  bNg.resize(Z(bNg.width),0);
+  bOg = loadImage("ReferenceButtonOverGreen.gif");
+  bOg.resize(Z(bOg.width),0);
+  bPg = loadImage("ReferenceButtonPressedGreen.gif");  
+  bPg.resize(Z(bPg.width),0);
   Gauge = loadImage("Gauge.png"); 
   Gauge.resize(Z(Gauge.width),0);
   GaugeTextField = loadImage("GaugeTextField.png"); 
@@ -694,6 +705,20 @@ void draw()
  //               MeanValues.println();
                }
             }
+            else if (!PreInitRS232Flag && !SensorsFlag)
+            {
+              TxData(0, 'Q', 0, 3);  // ask for raw sensors data
+              if (RxData('Q',13))
+              {// two bytes -> i int
+                MesSpeed = Int16toint32(((RxBuff[HeadLen] << 8) + (RxBuff[HeadLen+1])));
+                Current = (float)((RxBuff[HeadLen+2] << 8) + (RxBuff[HeadLen+3]));
+                Xpos = Int16toint32((RxBuff[HeadLen+4] << 8) + (RxBuff[HeadLen+5]));
+                Ypos = Int16toint32((RxBuff[HeadLen+6] << 8) + (RxBuff[HeadLen+7]));
+                MesAngle = Int16toint32((RxBuff[HeadLen+8] << 8) + (RxBuff[HeadLen+9]));
+                CompassAngle = (Int16toint32((RxBuff[HeadLen+10] << 8) + (RxBuff[HeadLen+11]))) / 10;
+                IdlePerc = RxBuff[HeadLen+12];
+            }
+            
             if (!CamFlag)
             {
               Graph(Xpos,Ypos);

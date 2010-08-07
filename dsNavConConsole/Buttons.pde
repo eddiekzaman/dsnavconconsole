@@ -25,17 +25,18 @@ void DefineButtons()
   BtnSendDist = new ImageButtons(Z(1170), Z(550), "Send", 1);
   BtnSendXY = new ImageButtons(Z(1170), Z(600), "Send", 1);
   BtnSendVersion = new ImageButtons(Z(1170), Z(650), "Version", 1);
-  BtnSendHalt = new ImageButtons(Z(845), Z(685), "Halt", 1);
+  BtnSendHalt = new ImageButtons(Z(845), Z(500), "Halt", 1);
   BtnCamOn = new ImageButtons(Z(845), Z(650), "Cam Off", 0);
   BtnCamOff = new ImageButtons(Z(845), Z(650), "Cam On", 1);
   BtnSendReset = new ImageButtons(Z(945), Z(685), "Reset", 1);
-  BtnStartSeq = new ImageButtons(Z(845), Z(500), "Start Seq", 1);
+  BtnStartSeq = new ImageButtons(Z(845), Z(685), "Start Seq", 1);
   BtnDebugOff = new ImageButtons(Z(845), Z(738), "Debug On", 1);
   BtnDebugOn = new ImageButtons(Z(845), Z(738), "Debug Off", 0);
+  BtnSim = new ImageButtons(Z(845), Z(738), "Sim", 2);  
   BtnStopOff = new ImageButtons(Z(945), Z(738), "Rx Stop", 1);
   BtnStopOn = new ImageButtons(Z(945), Z(738), "Rx Go", 0);
+  BtnSensors = new ImageButtons(Z(945), Z(738), "Sensors", 2);
   BtnSms = new ImageButtons(Z(0), Z(0), "SMS", 1);  
-  BtnSim = new ImageButtons(Z(0), Z(785), "Sim", 1);  
   BtnMap = new ImageButtons(Z(845), Z(550), "Map", 1);  
     
   // Define and create image button for Config panel *************************
@@ -109,7 +110,7 @@ class Button
 
 class ImageButtons extends Button 
 {
-  /* two sets of images are defined for buttons, the main and an alternative one
+  /* three sets of images are defined for buttons, the main and an 2 alternativs
      sometime used to show a toggle button.
      Three images are needed for each set:
      Normal viewing
@@ -140,12 +141,17 @@ class ImageButtons extends Button
       Oimage = bO;
       Pimage = bP;
     }
-    else
+    else if (Color == 0)
     {
       Nimage = bNr;
       Oimage = bOr;
       Pimage = bPr;
-
+    }
+   else if (Color == 2)
+    {
+      Nimage = bNg;
+      Oimage = bOg;
+      Pimage = bPg;
     }
     currentimage = Nimage;
   }
