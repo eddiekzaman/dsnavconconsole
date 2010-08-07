@@ -7,7 +7,8 @@ void SimulationDrawing()
     DeltaY = DeltaDist * (cos(MesAngle + HALF_PI));
     if (!CamFlag)
     {
-      Graph(DeltaX+PrevXtmp,DeltaY+PrevYtmp);
+      Xpos=DeltaX+PrevXtmp;
+      Ypos=DeltaY+PrevYtmp;
     }
     Xpos=DeltaX+PrevXtmp;
     Ypos=DeltaY+PrevYtmp;

@@ -3,6 +3,7 @@ void DefineMainGrid ()
 {
    DefineGrid(MainGridMinX, MainGridMaxX, MainGridMinY, MainGridMaxY, MainGridXstep, 
                MainGridYstep, MainGridXstepSmall, MainGridYstepSmall, MainGridFlag);
+   Grid = get(Z(57),Z(21),Z(751),Z(751));
 }
 
 /*-----------------------------------------------------------------------------*/
@@ -173,6 +174,42 @@ void MyLine (float X0, float Y0, float X1, float Y1)
   popMatrix();
 }
 
+/*-----------------------------------------------------------------------------*/
+void Robot (float X0, float Y0)
+{ 
+  float RobotQuadSize = 200;    // the octagon is inscribed in a square
+  float RobotRadius;
+  float OctAngle;
+  RobotRadius = RobotQuadSize/(cos(PI/8));
+  int RobotSize = (int)(Xk*RobotRadius/2); //in mm
+  float radStep = (2*PI / 8); // 'there's 2 pi radians in 360 degrees
+  float Rads;
+  if (SimulationDrawFlag)          // simulation
+    {
+      OctAngle=MesAngle-radStep/2;
+    }
+    else
+    {
+      OctAngle=radians(MesAngle)-radStep/2-PI/2;
+    }
+  pushMatrix();
+  translate(RelX0,RelY0);
+  rotate(-HALF_PI);
+  // rotating system switches X with Y
+  strokeWeight(3);
+  stroke(255,255,0);
+  noFill();
+  
+  for (Rads = -PI; Rads <= PI; Rads+= radStep)
+  {
+    line (YGraph(Y0) + RobotSize * cos(Rads + OctAngle), XGraph(X0) + RobotSize * sin(Rads + OctAngle), YGraph(Y0) + RobotSize * cos(Rads - radStep + OctAngle), XGraph(X0) + RobotSize * sin(Rads - radStep + OctAngle));
+  }
+  stroke(255,255,0);
+  strokeWeight(3);
+  ellipseMode(CENTER);
+  triangle (YGraph(Y0), XGraph(X0), YGraph(Y0) + RobotSize * cos(radStep*2 + OctAngle), XGraph(X0) + RobotSize * sin(radStep*2 + OctAngle), YGraph(Y0) + RobotSize * cos(radStep*3 + OctAngle), XGraph(X0) + RobotSize * sin(radStep*3 + OctAngle));
+  popMatrix();
+}
 
 /*-----------------------------------------------------------------------------*/
 void Objects(float Xcoord, float Ycoord, int Cell)
@@ -198,8 +235,14 @@ void Objects(float Xcoord, float Ycoord, int Cell)
     fill(0,255,255);  // purple = target found
     Val=CellSize/2;
   }
+  
   rectMode(CENTER);
-  rect (YGraph(Ycoord+CellSize/2), XGraph(Xcoord+CellSize/2), (Val*Yk), (Val*Xk));
+  strokeWeight(1);
+      
+  if ((Xcoord<(MainGridMaxX-CellSize/2)) && (Xcoord>(MainGridMinX+CellSize/2)) && (Ycoord<(MainGridMaxY-CellSize/2)) && (Ycoord >(MainGridMinY-CellSize/2)))
+  {
+    rect (YGraph(Ycoord), XGraph(Xcoord), (Val*Yk), (Val*Xk));
+  }
   rectMode(LEFT);
   popMatrix();
 }

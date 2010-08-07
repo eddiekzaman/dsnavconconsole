@@ -315,6 +315,7 @@ void ButtonMap()
              Objects(Xcoord, Ycoord, CellValue);
 //             print("("+Xcoord+" "+CellValue+") ");  // debug
           }
+          image(Grid,Z(57),Z(21));
         }
       }    
     }

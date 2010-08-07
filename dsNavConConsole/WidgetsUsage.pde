@@ -12,9 +12,12 @@ void MainPanel()  // Main panel controls
     }
     else
     {
+      image(Grid,Z(57),Z(21));
+      Graph(Xpos,Ypos);
       Grid = get(Z(57),Z(21),Z(751),Z(751));
       background(bg);
       image(Grid,Z(57),Z(21));
+      Robot(Xpos,Ypos);
     }
 
     image(Xscale,Z(30),Z(775));

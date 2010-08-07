@@ -424,6 +424,8 @@ Capture Cam;
 int[] VObX = new int[3];  // Obstacle position, X coord in cm
 int[] VObY = new int[3];  // Obstacle position, Y coord in cm
 
+
+
 /*/////////////////////////////////////////////////////////////////////////////*/
 
 void setup()
@@ -722,16 +724,12 @@ void draw()
                   VObX[i] = Int16toint32((RxBuff[HeadLen+6+(i*4)] << 8) + (RxBuff[HeadLen+7+(i*4)]))*10;
                   VObY[i] = Int16toint32((RxBuff[HeadLen+8+(i*4)] << 8) + (RxBuff[HeadLen+9+(i*4)]))*10;
                   Objects(VObX[i]+Xpos, VObY[i]+Ypos, 7);
-    //              print("Obj: "+i+": "+VObX[i]+"  "+VObY[i]+"   - ");    // debug
+//                  print("Obj: "+i+": "+VObX[i]+"  "+VObY[i]+"   - ");    // debug
                 }
-    //            println("  Pos: "+Xpos+"  "+Ypos+"  Angle: "+MesAngle);    // debug
+//                println("  Pos: "+Xpos+"  "+Ypos+"  Angle: "+MesAngle);    // debug
               }
             }
             
-            if (!CamFlag)
-            {
-              Graph(Xpos,Ypos);
-            }
           break;
     
           case 2:
