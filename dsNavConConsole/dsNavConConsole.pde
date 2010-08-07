@@ -1,10 +1,10 @@
 /* ////////////////////////////////////////////////////////////////////////////
 ** File:      dsNavConConsole.pde					    */
- String VerCon = new String ("dsNavConsole 1.6.0 - 08-2010"); //---
+ String VerCon = new String ("dsNavConsole 1.6.1 - 08-2010"); //---
 /* Author:    Guido Ottaviani-->g.ottaviani@mediaprogetti.it<--
 ** Description: navigation control board remote console
 -------------------------------------------------------------------------------
-** Compatible with dsPid33 version 2.2.3 
+** Compatible with dsPid33 version 2.2.4 and higher
 -------------------------------------------------------------------------------
 Copyright 2010 Guido Ottaviani
 g.ottaviani@mediaprogetti.it
@@ -421,6 +421,8 @@ boolean CamFlag=false;
 boolean CamOkFlag=false;
 Capture Cam;
 
+int[] VObX = new int[3];  // Obstacle position, X coord in cm
+int[] VObY = new int[3];  // Obstacle position, Y coord in cm
 
 /*/////////////////////////////////////////////////////////////////////////////*/
 
@@ -705,18 +707,25 @@ void draw()
  //               MeanValues.println();
                }
             }
-            else if (!PreInitRS232Flag && !SensorsFlag)
+            else if (!PreInitRS232Flag && SensorsFlag)
             {
+              Current =0;
+              CompassAngle=0;
               TxData(0, 'Q', 0, 3);  // ask for raw sensors data
-              if (RxData('Q',13))
+              if (RxData('Q',18))
               {// two bytes -> i int
-                MesSpeed = Int16toint32(((RxBuff[HeadLen] << 8) + (RxBuff[HeadLen+1])));
-                Current = (float)((RxBuff[HeadLen+2] << 8) + (RxBuff[HeadLen+3]));
-                Xpos = Int16toint32((RxBuff[HeadLen+4] << 8) + (RxBuff[HeadLen+5]));
-                Ypos = Int16toint32((RxBuff[HeadLen+6] << 8) + (RxBuff[HeadLen+7]));
-                MesAngle = Int16toint32((RxBuff[HeadLen+8] << 8) + (RxBuff[HeadLen+9]));
-                CompassAngle = (Int16toint32((RxBuff[HeadLen+10] << 8) + (RxBuff[HeadLen+11]))) / 10;
-                IdlePerc = RxBuff[HeadLen+12];
+                Xpos = Int16toint32((RxBuff[HeadLen+0] << 8) + (RxBuff[HeadLen+1]));
+                Ypos = Int16toint32((RxBuff[HeadLen+2] << 8) + (RxBuff[HeadLen+3]));
+                MesAngle = Int16toint32((RxBuff[HeadLen+4] << 8) + (RxBuff[HeadLen+5]));
+                for(i=0; i<3; i++)
+                {
+                  VObX[i] = Int16toint32((RxBuff[HeadLen+6+(i*4)] << 8) + (RxBuff[HeadLen+7+(i*4)]))*10;
+                  VObY[i] = Int16toint32((RxBuff[HeadLen+8+(i*4)] << 8) + (RxBuff[HeadLen+9+(i*4)]))*10;
+                  Objects(VObX[i]+Xpos, VObY[i]+Ypos, 7);
+    //              print("Obj: "+i+": "+VObX[i]+"  "+VObY[i]+"   - ");    // debug
+                }
+    //            println("  Pos: "+Xpos+"  "+Ypos+"  Angle: "+MesAngle);    // debug
+              }
             }
             
             if (!CamFlag)
