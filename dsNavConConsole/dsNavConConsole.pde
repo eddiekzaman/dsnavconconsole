@@ -425,13 +425,11 @@ int[] VObX = new int[3];  // Obstacle position, X coord in cm
 int[] VObY = new int[3];  // Obstacle position, Y coord in cm
 
 
-
 /*/////////////////////////////////////////////////////////////////////////////*/
 
 void setup()
 {
   int ii = 0;
-
   if (loadStrings("YscreenSize.cfg") != null)
    {
      Zoom = loadStrings("YscreenSize.cfg");
