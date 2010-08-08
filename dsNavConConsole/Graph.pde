@@ -182,6 +182,8 @@ void Robot (float X0, float Y0)
   float OctAngle;
   float[][] Corners = new float[8][2];
   
+  if(InBound(X0,Y0))
+  {
   RobotRadius = RobotQuadSize/(cos(PI/8));
   int RobotSize = (int)(Xk*RobotRadius/2); //in mm
   float radStep = (2*PI / 8); // 'there's 2 pi radians in 360 degrees
@@ -215,12 +217,25 @@ void Robot (float X0, float Y0)
   stroke(255,255,0);
   strokeWeight(3);
   fill(#FFFF00,200);
-  triangle (YGraph(Y0), XGraph(X0), Corners[7][0], Corners[7][1], Corners[0][0], Corners[0][1]) ;
+  triangle (YGraph(Y0), XGraph(X0), Corners[7][0], Corners[7][1], Corners[0][0], 
+          Corners[0][1]) ;
   int QuadSize=20;
-  quad(Corners[6][0], Corners[6][1], Corners[5][0], Corners[5][1], Corners[5][0] + Xk*QuadSize*cos(radStep*4 + OctAngle), Corners[5][1] + Yk*QuadSize*sin(radStep*4 + OctAngle), Corners[6][0] + Xk*QuadSize*cos(radStep*5 + OctAngle), Corners[6][1] + Yk*QuadSize*sin(radStep*5 + OctAngle));
-  quad(Corners[1][0], Corners[1][1], Corners[2][0], Corners[2][1], Corners[2][0] + Xk*QuadSize*cos(radStep*1 + OctAngle), Corners[2][1] + Yk*QuadSize*sin(radStep*1 + OctAngle), Corners[1][0] + Xk*QuadSize*cos(radStep*0 + OctAngle), Corners[1][1] + Yk*QuadSize*sin(radStep*0 + OctAngle));
+  
+  quad(Corners[6][0], Corners[6][1], Corners[5][0], Corners[5][1], Corners[5][0]
+        + Xk*QuadSize*cos(radStep*4 + OctAngle), Corners[5][1]
+        + Yk*QuadSize*sin(radStep*4 + OctAngle), Corners[6][0] 
+        + Xk*QuadSize*cos(radStep*5 + OctAngle), Corners[6][1] 
+        + Yk*QuadSize*sin(radStep*5 + OctAngle));
+        
+  quad(Corners[1][0], Corners[1][1], Corners[2][0], Corners[2][1], Corners[2][0] 
+        + Xk*QuadSize*cos(radStep*1 + OctAngle), Corners[2][1] 
+        + Yk*QuadSize*sin(radStep*1 + OctAngle), Corners[1][0] 
+        + Xk*QuadSize*cos(radStep*0 + OctAngle), Corners[1][1] 
+        + Yk*QuadSize*sin(radStep*0 + OctAngle));
+        
   popMatrix();
   fill(255,255,255);
+  }
 }
 
 /*-----------------------------------------------------------------------------*/
@@ -251,12 +266,13 @@ void Objects(float Xcoord, float Ycoord, int Cell)
   rectMode(CENTER);
   strokeWeight(1);
       
-  if ((Xcoord<(MainGridMaxX-CellSize/2)) && (Xcoord>(MainGridMinX+CellSize/2)) && (Ycoord<(MainGridMaxY-CellSize/2)) && (Ycoord >(MainGridMinY-CellSize/2)))
+  if (InBound(Xcoord, Ycoord))
   {
     rect (YGraph(Ycoord), XGraph(Xcoord), (Val*Yk), (Val*Xk));
   }
   rectMode(LEFT);
   popMatrix();
+  fill(255,255,255);
 }
 
 /*-----------------------------------------------------------------------------*/

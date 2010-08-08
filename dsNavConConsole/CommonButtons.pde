@@ -304,6 +304,7 @@ void ButtonMap()
   //        println();  // debug
   //        println();  // debug
   //        println ("(X:"+Xshift+" Y:"+Yshift+" Ycoord:"+Ycoord+" Yindx:"+Yindx+ ") *** "); // debug
+          image(Grid,Z(57),Z(21));
           for (Xindx = 0; Xindx < MapXsizeR; Xindx++)
           {
              CellValue=RxBuff[Xindx+HeadLen+5] & 0x0F; // lower nibble
@@ -315,7 +316,7 @@ void ButtonMap()
              Objects(Xcoord, Ycoord, CellValue);
 //             print("("+Xcoord+" "+CellValue+") ");  // debug
           }
-          image(Grid,Z(57),Z(21));
+          Grid = get(Z(57),Z(21),Z(751),Z(751));
         }
       }    
     }

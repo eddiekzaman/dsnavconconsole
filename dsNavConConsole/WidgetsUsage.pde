@@ -18,6 +18,13 @@ void MainPanel()  // Main panel controls
       background(bg);
       image(Grid,Z(57),Z(21));
       Robot(Xpos,Ypos);
+      if(SensorsFlag)
+      {
+        for(i=0; i<3; i++)
+        {
+          Objects(VObX[i]+Xpos, VObY[i]+Ypos, 7);
+        }
+      }
     }
 
     image(Xscale,Z(30),Z(775));

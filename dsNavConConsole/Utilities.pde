@@ -1,4 +1,17 @@
 /*-----------------------------------------------------------------------------*/
+boolean InBound(float Xcoord, float Ycoord)
+{
+  if ((Xcoord<(MainGridMaxX-CellSize/2)) && (Xcoord>(MainGridMinX+CellSize/2)) 
+      && (Ycoord<(MainGridMaxY-CellSize/2)) && (Ycoord >(MainGridMinY-CellSize/2)))
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+/*-----------------------------------------------------------------------------*/
 int Z(float Num2Scale)
 {
   // Zoom the graphics ZoomFactor = 1 -> 1280 x 800 monitor
