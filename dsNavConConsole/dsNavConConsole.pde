@@ -1,6 +1,6 @@
 /* ////////////////////////////////////////////////////////////////////////////
 ** File:      dsNavConConsole.pde					    */
- String VerCon = new String ("dsNavConsole 1.6.1 - 08-2010"); //---
+ String VerCon = new String ("dsNavConsole 1.6.2 - 02-2011"); //---
 /* Author:    Guido Ottaviani-->g.ottaviani@mediaprogetti.it<--
 ** Description: navigation control board remote console
 -------------------------------------------------------------------------------
@@ -540,10 +540,18 @@ void setup()
   stroke(255,0,0);
 
   i=0;
-  while(i< Capture.list().length)
+  
+  try
   {
-    CaptureList = (append(CaptureList, Capture.list()[i]));
-    i++;
+    while(i< Capture.list().length)
+    {
+      CaptureList = (append(CaptureList, Capture.list()[i]));
+      i++;
+    }
+  }
+  catch(Exception e)    // no CAMs available
+  {
+  
   }
   
   if (! SimulationRS232Flag)
