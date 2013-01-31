@@ -26,7 +26,7 @@ g.ottaviani@mediaprogetti.it
 import processing.serial.*;
 import interfascia.*;
 import controlP5.*;
-import processing.video.*;
+// import processing.video.*; NO_CAM
 
 // import sms.*; //Sudden Motion Sensor
 
@@ -419,7 +419,7 @@ boolean TxMapFlag=false;
 
 boolean CamFlag=false;
 boolean CamOkFlag=false;
-Capture Cam;
+// Capture Cam; NO_CAM
 
 int[] VObX = new int[3];  // Obstacle position, X coord in cm
 int[] VObY = new int[3];  // Obstacle position, Y coord in cm
@@ -541,6 +541,7 @@ void setup()
 
   i=0;
   
+  /* NO_CAM
   try
   {
     while(i< Capture.list().length)
@@ -553,6 +554,7 @@ void setup()
   {
   
   }
+  */
   
   if (! SimulationRS232Flag)
   {
@@ -590,10 +592,13 @@ void setup()
   InputFieldsRun();
 }
 
+
+/* NO_CAM
 void captureEvent(Capture Cam) 
 {
   Cam.read();
 }
+*/
 
 // main loop --------------------------------------------------------------------
 void draw()

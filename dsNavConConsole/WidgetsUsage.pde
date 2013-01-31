@@ -1,6 +1,7 @@
 /*-----------------------------------------------------------------------------*/  
 void MainPanel()  // Main panel controls
 {
+  /* NO_CAM
     if (CamFlag)
     {
       background(bg);
@@ -12,6 +13,8 @@ void MainPanel()  // Main panel controls
     }
     else
     {
+   */
+   
       image(Grid,Z(57),Z(21));
       Graph(Xpos,Ypos);
       Grid = get(Z(57),Z(21),Z(751),Z(751));
@@ -24,7 +27,7 @@ void MainPanel()  // Main panel controls
         {
           Objects(VObX[i]+Xpos, VObY[i]+Ypos, 7);
         }
-      }
+      // }
     }
 
     image(Xscale,Z(30),Z(775));
@@ -565,7 +568,8 @@ void ConfigPanel()  // Config panel controls
         text(i + " = " + CaptureList[i],Z(260),Z(530) + (i*20));
       }
       fill(255,255,255);
-    
+      
+    /* NO_CAM
     BtnSendCam.update();
     if (BtnSendCam.released)
     {
@@ -589,6 +593,7 @@ void ConfigPanel()  // Config panel controls
        }
     }
     BtnSendCam.display();
+    */
     
       StandardFont();
       textAlign(LEFT);
